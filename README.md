@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 TIARA — Luxury Modest Fashion E-Commerce Website
 
-## Getting Started
+<div align="center">
+  <img src="public/images/tiara-cover.png" alt="TIARA Cover Banner" width="100%" />
+</div>
 
-First, run the development server:
+<p align="center">
+  <b>TIARA</b> is an elegant, high-conversion modest fashion e-commerce platform tailored specifically for Bangladeshi clients. Built with <b>Next.js (App Router)</b>, <b>TypeScript</b>, <b>React</b>, <b>Tailwind CSS</b>, and <b>Supabase</b>.
+</p>
 
+---
+
+## ✨ Key Features
+
+### 🛍️ Tailored for Bangladeshi Customers
+- **1-Click "সরাসরি অর্ডার করুন" (Direct Cash on Delivery)**: Frictionless ordering modal requiring only **Name**, **11-digit Phone Number**, and **Delivery Address**.
+- **Automated Delivery Fee Calculation**:
+  - ঢাকার ভিতরে (Inside Dhaka): **৳ ৭০**
+  - ঢাকার বাইরে (Outside Dhaka): **৳ ১৩০**
+  - **Free Delivery** on orders of ৳ 3,000 or more.
+- **Direct WhatsApp & Messenger Ordering**: Customers can order via Messenger (`m.me/tiarabd`) or WhatsApp with pre-filled product details.
+- **Bangladeshi Sizing & BDT Currency**: Modest fashion sizing (`52`, `54`, `56`) and clear BDT (`৳`) pricing with strike-through discounts.
+
+### 🎨 Brand Identity & Aesthetics
+- **Palette**: Deep Royal Burgundy (`#590F23`), Hover Wine (`#721631`), Petal Pink (`#FAF1F4`, `#F7D6DE`), and Rose Gold (`#C68E4D`).
+- **Floral Damask Watermark**: Handcrafted SVG texture (`public/images/floral-pattern.svg`) matching the brand's horizontal banner applied subtly across backgrounds, banners, and footer.
+- **Typography**: Cormorant Garamond serif for luxury titles and Plus Jakarta Sans for clean legibility.
+
+### 📱 Layout & Navigation (Inspired by Anzaar Lifestyle)
+- **Top Announcement Bar**: Nationwide Cash on Delivery notices and helpline.
+- **Hero Slider**: Interactive carousel showcasing brand banners and seasonal collections.
+- **Circular Category Pills**: Quick navigation for Abayas, Festive Gowns, Khimars, Co-ords, and Accessories.
+- **Watch & Shop**: Video reels showcase with views count and direct "অর্ডার করুন" buttons.
+- **Mobile Bottom Navigation**:
+  1. **Home (হোম)**
+  2. **Category (ক্যাটাগরি)**
+  3. **Cart (ব্যাগ)**
+  4. **Facebook / Messenger (মেসেঞ্জার)** anchored in the bottom right.
+- **Desktop Floating Messenger Widget**: Direct customer care bubble in bottom right.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, Turbopack)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **UI & Styling**: [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Database**: [Supabase](https://supabase.com/) (with ready-to-run `supabase_schema.sql` and graceful fallback)
+- **Effects**: [canvas-confetti](https://www.npmjs.com/package/canvas-confetti)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for Production
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🗄️ Supabase Database Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a project at [supabase.com](https://supabase.com).
+2. Go to **SQL Editor** -> **New Query**, paste the contents of [`supabase_schema.sql`](supabase_schema.sql), and click **Run**.
+3. Copy your project URL and anon public key into `.env.local`:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+NEXT_PUBLIC_MESSENGER_URL=https://m.me/tiarabd
+NEXT_PUBLIC_WHATSAPP_NUMBER=8801700000000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Deployment on Vercel
 
-## Deploy on Vercel
+1. Push your repository to GitHub.
+2. Import the project in [Vercel](https://vercel.com/new).
+3. Add your environment variables (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`).
+4. Click **Deploy**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 **TIARA**. All Rights Reserved.
