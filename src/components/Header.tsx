@@ -7,13 +7,11 @@ import {
   ShoppingBag, 
   Search, 
   Menu, 
-  PhoneCall, 
   X,
-  ChevronDown,
   MessageCircle
 } from 'lucide-react';
 import { useStore } from '@/lib/store';
-import { CATEGORIES, MESSENGER_URL, FB_PROFILE_URL } from '@/lib/mockData';
+import { CATEGORIES, MESSENGER_URL } from '@/lib/mockData';
 
 export default function Header() {
   const { cartCount, setIsCartOpen, setIsCategoryDrawerOpen, isSearchOpen, setIsSearchOpen } = useStore();
@@ -27,7 +25,7 @@ export default function Header() {
           <div className="flex items-center gap-2 overflow-hidden text-center w-full sm:w-auto justify-center">
             <span className="inline-block w-2 h-2 rounded-full bg-[#F7D6DE] animate-pulse"></span>
             <p className="font-medium tracking-wide">
-              🌷 খাঁটি বেক্সি বয়েল নামাজের হিজাব | ডেলিভারি: চাঁদপুরে ৫০৳ {`{চাঁদপুর সদর}`}, ঢাকায় ১২০৳ 📦
+              🌷 খাঁটি বেক্সি বয়েল নামাজের হিজাব | চাঁদপুরে ডেলিভারি ৫০৳ {`{চাঁদপুর সদর}`}, ঢাকায় ১২০৳ 📦
             </p>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-xs font-light text-[#F7D6DE]">
@@ -35,10 +33,10 @@ export default function Header() {
               href={MESSENGER_URL}
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors font-semibold"
             >
-              <MessageCircle className="w-3.5 h-3.5 fill-current" />
-              <span>মেসেঞ্জারে অর্ডার করুন</span>
+              <MessageCircle className="w-3.5 h-3.5 fill-current text-[#0084FF]" />
+              <span>মেসেঞ্জারে ইনবক্স করুন</span>
             </a>
           </div>
         </div>
@@ -66,24 +64,15 @@ export default function Header() {
                 >
                   হোম (Home)
                 </Link>
-                <Link 
-                  href="/category/prayer-hijab" 
-                  className="hover:text-[#590F23] transition-colors"
-                >
-                  নামাজের হিজাব
-                </Link>
-                <Link 
-                  href="/category/inner-cap" 
-                  className="hover:text-[#590F23] transition-colors"
-                >
-                  ইনার ক্যাপ
-                </Link>
-                <Link 
-                  href="/category/hijab-pins" 
-                  className="hover:text-[#590F23] transition-colors"
-                >
-                  হিজাব পিন
-                </Link>
+                {CATEGORIES.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={`/category/${cat.slug}`}
+                    className="hover:text-[#590F23] transition-colors"
+                  >
+                    {cat.banglaName}
+                  </Link>
+                ))}
               </nav>
             </div>
 
@@ -141,7 +130,7 @@ export default function Header() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="নামাজের হিজাব, ইনার ক্যাপ বা হিজাব পিন খুঁজুন..."
+                  placeholder="ল্যাভেন্ডার, মিন্ট বা পিচ হিজাব খুঁজুন..."
                   className="w-full pl-11 pr-4 py-2.5 bg-white rounded-full border border-[#F7D6DE] text-sm text-[#241117] focus:outline-none focus:border-[#590F23] shadow-xs"
                   autoFocus
                 />

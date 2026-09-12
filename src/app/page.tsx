@@ -3,24 +3,21 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, MessageCircle, Truck, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
+import { Sparkles, ArrowRight, MessageCircle, Truck, CheckCircle2 } from 'lucide-react';
 import HeroSlider from '@/components/HeroSlider';
 import CategoryPills from '@/components/CategoryPills';
 import ProductSection from '@/components/ProductSection';
 import CustomerReviews from '@/components/CustomerReviews';
 import TrustBadges from '@/components/TrustBadges';
-import { PRODUCTS, MESSENGER_URL, FB_PROFILE_URL } from '@/lib/mockData';
+import { PRODUCTS, MESSENGER_URL } from '@/lib/mockData';
 
 export default function Home() {
-  const prayerHijabs = PRODUCTS.filter((p) => p.category === 'prayer-hijab');
-  const accessories = PRODUCTS.filter((p) => p.category === 'inner-cap' || p.category === 'hijab-pins');
-
   return (
     <div className="min-h-screen tiara-bg-pattern">
       {/* 1. Hero Slider with Real Prayer Hijab Photos */}
       <HeroSlider />
 
-      {/* 2. Category Highlights */}
+      {/* 2. Category Highlights with Real Product Photos */}
       <CategoryPills />
 
       {/* 3. Main Product Section: Prayer Hijab Collection */}
@@ -28,8 +25,8 @@ export default function Home() {
         title="PRAYER HIJAB COLLECTION"
         banglaTitle="খাঁটি বেক্সি বয়েল নামাজের হিজাব"
         subtitle="১ পিসের দাম ৫৫০ টাকা"
-        products={prayerHijabs}
-        viewAllLink="/category/prayer-hijab"
+        products={PRODUCTS}
+        viewAllLink="/category/lavender"
       />
 
       {/* 4. Highlight Feature Banner with Exact Customer Description */}
@@ -67,7 +64,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 space-y-4 text-left">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#590F23] text-white text-xs font-semibold">
                 <Sparkles className="w-3.5 h-3.5 text-[#E7BA83]" />
-                <span>অরিজিনাল বেক্সি ফেব্রিক</span>
+                <span>অরিজিনাল বেক্সি বয়েল ফেব্রিক</span>
               </div>
 
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#590F23] leading-tight">
@@ -128,10 +125,10 @@ export default function Home() {
                 </a>
 
                 <Link
-                  href="/category/prayer-hijab"
+                  href="/category/lavender"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#590F23] hover:bg-[#721631] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
                 >
-                  <span>ওয়েবসাইটে সরাসরি অর্ডার</span>
+                  <span>কালেকশন দেখুন</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -141,19 +138,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Accessories Section (Inner Cap & Hijab Pins) */}
-      <ProductSection
-        title="INNER CAP & HIJAB PINS"
-        banglaTitle="ইনার ক্যাপ ও ম্যাগনেটিক পিন"
-        subtitle="নামাজের হিজাব সুন্দরভাবে পরার জন্য"
-        products={accessories}
-        viewAllLink="/category/inner-cap"
-      />
-
-      {/* 6. Customer Testimonials */}
+      {/* 5. Customer Testimonials */}
       <CustomerReviews />
 
-      {/* 7. Trust & Delivery Badges */}
+      {/* 6. Trust & Delivery Badges */}
       <TrustBadges />
     </div>
   );

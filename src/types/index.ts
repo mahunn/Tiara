@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   banglaName?: string;
   slug: string;
-  category: 'prayer-hijab' | 'inner-cap' | 'hijab-pins';
+  category: string;
   price: number;
   originalPrice?: number;
   discountBadge?: string;
@@ -21,7 +21,7 @@ export interface Product {
 }
 
 export interface Category {
-  id: 'prayer-hijab' | 'inner-cap' | 'hijab-pins';
+  id: string;
   name: string;
   banglaName: string;
   slug: string;
@@ -74,5 +74,5 @@ export interface CustomerReview {
   comment: string;
   date: string;
   productName: string;
-  avatar: string;
+  avatarInitial: string;
 }
