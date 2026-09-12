@@ -3,38 +3,47 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, MessageCircle, Truck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, MessageCircle, Truck, CheckCircle2 } from 'lucide-react';
 import HeroSlider from '@/components/HeroSlider';
 import CategoryPills from '@/components/CategoryPills';
 import ProductSection from '@/components/ProductSection';
-import CustomerReviews from '@/components/CustomerReviews';
 import TrustBadges from '@/components/TrustBadges';
 import { PRODUCTS, MESSENGER_URL } from '@/lib/mockData';
 
 export default function Home() {
+  const hijabProducts = PRODUCTS.filter((p) => p.category === 'hijab');
+  const otherProducts = PRODUCTS.filter((p) => p.category !== 'hijab');
+
   return (
     <div className="min-h-screen tiara-bg-pattern">
-      {/* 1. Hero Slider with Real Prayer Hijab Photos */}
+      {/* 1. Hero Slider */}
       <HeroSlider />
 
-      {/* 2. Category Highlights with Real Product Photos */}
+      {/* 2. 3 Categories (হিজাব, লেইস ইনার ক্যাপ, হিজাব পিন) */}
       <CategoryPills />
 
-      {/* 3. Main Product Section: Prayer Hijab Collection */}
+      {/* 3. Hijabs Set Colorwise */}
       <ProductSection
         title="PRAYER HIJAB COLLECTION"
         banglaTitle="খাঁটি বেক্সি বয়েল নামাজের হিজাব"
-        subtitle="১ পিসের দাম ৫৫০ টাকা"
-        products={PRODUCTS}
-        viewAllLink="/category/lavender"
+        products={hijabProducts}
+        viewAllLink="/category/hijab"
       />
 
-      {/* 4. Highlight Feature Banner */}
+      {/* 4. Inner Caps & Hijab Pins */}
+      <ProductSection
+        title="INNER CAPS & ACCESSORIES"
+        banglaTitle="লেইস ইনার ক্যাপ ও হিজাব পিন"
+        products={otherProducts}
+        viewAllLink="/category/inner-cap"
+      />
+
+      {/* 5. Highlight Feature Banner */}
       <section className="py-4 sm:py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-3xl overflow-hidden tiara-banner-pattern border border-[#F7D6DE] shadow-lg p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
             
-            {/* Left: Real Photos in Clean Elegant Frame */}
+            {/* Left: Photos in Clean Elegant Frame */}
             <div className="w-full lg:w-1/2 flex flex-col sm:flex-row gap-3 items-center justify-center">
               <div className="relative aspect-[3/4] w-full sm:w-1/2 rounded-2xl overflow-hidden shadow-sm border border-[#F7D6DE] bg-white">
                 <Image
@@ -63,7 +72,7 @@ export default function Home() {
               <ul className="space-y-2 text-xs sm:text-sm text-[#241117]">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#590F23] flex-shrink-0" />
-                  <span>খাঁটি বেক্সি বয়েল (Bexi boil) সুতি কাপড়</span>
+                  <span>খাঁটি বেক্সি বয়েল সুতি কাপড়</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#590F23] flex-shrink-0" />
@@ -109,7 +118,7 @@ export default function Home() {
                 </a>
 
                 <Link
-                  href="/category/lavender"
+                  href="/category/hijab"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#590F23] hover:bg-[#721631] text-white font-semibold text-xs sm:text-sm shadow-sm transition-all active:scale-95"
                 >
                   <span>কালেকশন দেখুন</span>
@@ -122,10 +131,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Customer Testimonials */}
-      <CustomerReviews />
-
-      {/* 6. Trust & Delivery Badges */}
+      {/* 6. Trust & Delivery */}
       <TrustBadges />
     </div>
   );

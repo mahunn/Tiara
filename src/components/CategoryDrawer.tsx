@@ -27,7 +27,7 @@ export default function CategoryDrawer() {
           <div className="flex items-center justify-between px-5 py-4 border-b border-[#F7D6DE] bg-[#FAF1F4]">
             <div className="relative h-10 w-28">
               <Image
-                src="/images/tiara-logo.jpg"
+                src="/images/tiara-logo-transparent.png"
                 alt="TIARA"
                 fill
                 className="object-contain"

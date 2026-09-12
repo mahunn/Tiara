@@ -26,7 +26,7 @@ export interface Category {
   banglaName: string;
   slug: string;
   image: string;
-  itemCount: number;
+  itemCount?: number;
   description?: string;
 }
 

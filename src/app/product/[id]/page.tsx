@@ -16,7 +16,7 @@ import {
   Phone,
   Check
 } from 'lucide-react';
-import { PRODUCTS, MESSENGER_URL } from '@/lib/mockData';
+import { PRODUCTS, CATEGORIES, MESSENGER_URL } from '@/lib/mockData';
 import { useStore } from '@/lib/store';
 import ProductCard from '@/components/ProductCard';
 
@@ -37,6 +37,7 @@ export default function ProductDetailPage() {
     notFound();
   }
 
+  const category = CATEGORIES.find((c) => c.slug === product.category);
   const relatedProducts = PRODUCTS.filter(
     (p) => p.category === product.category && p.id !== product.id
   ).slice(0, 4);
@@ -62,8 +63,8 @@ export default function ProductDetailPage() {
             হোম
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href={`/category/${product.category}`} className="hover:text-[#590F23] transition-colors capitalize">
-            {product.category}
+          <Link href={`/category/${product.category}`} className="hover:text-[#590F23] transition-colors">
+            {category?.banglaName || product.category}
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[#590F23] font-semibold truncate max-w-[200px]">

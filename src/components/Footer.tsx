@@ -30,16 +30,16 @@ export default function Footer() {
           
           {/* Column 1: Brand & Story */}
           <div className="space-y-4">
-            <div className="relative h-14 w-40 bg-white/95 rounded-2xl p-1 shadow-sm">
+            <div className="relative h-14 w-40">
               <Image
-                src="/images/tiara-logo.jpg"
+                src="/images/tiara-logo-light.png"
                 alt="TIARA"
                 fill
-                className="object-contain"
+                className="object-contain object-left"
               />
             </div>
             <p className="text-xs text-[#E5B6C3] leading-relaxed">
-              নামাজের জন্য আরামদায়ক ও বাতাস চলাচল-সহায়ক খাঁটি বেক্সি বয়েল হিজাব।
+              নামাজের হিজাব, বাতাস চলাচল-উপযোগী লেইস ইনার ক্যাপ ও হিজাব পিন।
             </p>
             <div className="pt-1 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs text-[#F7D6DE] border border-white/10">

@@ -9,21 +9,21 @@ const SLIDES = [
   {
     id: 1,
     image: '/images/tiara-cover.png',
-    link: '/category/lavender',
+    link: '/category/hijab',
     isBrandBanner: true,
   },
   {
     id: 2,
     title: 'বেক্সি বয়েল নামাজের হিজাব',
     image: '/images/products/prayer-hijab-all-1.jpg',
-    link: '/category/lavender',
+    link: '/category/hijab',
     isBrandBanner: false,
   },
   {
     id: 3,
-    title: '৩ কালার কম্বো প্যাক',
-    image: '/images/products/prayer-hijab-all-2.jpg',
-    link: '/category/combo',
+    title: 'লেইস ইনার ক্যাপ ও হিজাব পিন',
+    image: '/images/products/inner-cap-lace.jpg',
+    link: '/category/inner-cap',
     isBrandBanner: false,
   },
 ];

@@ -80,7 +80,7 @@ export default function Header() {
               <Link href="/" className="flex items-center gap-2 group">
                 <div className="relative h-12 w-32 sm:h-14 sm:w-44 transition-transform group-hover:scale-[1.02]">
                   <Image
-                    src="/images/tiara-logo.jpg"
+                    src="/images/tiara-logo-transparent.png"
                     alt="TIARA"
                     fill
                     priority
