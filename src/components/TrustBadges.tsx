@@ -6,23 +6,23 @@ import { Truck, ShieldCheck, Wind, CheckCircle2 } from 'lucide-react';
 const BADGES = [
   {
     icon: Wind,
-    title: 'খাঁটি বেক্সি বয়েল (Bexi boil)',
-    description: '১০০% সুতি আরামদায়ক কাপড়, যা নামাজে বাতাস চলাচল নিশ্চিত করে',
+    title: 'খাঁটি বেক্সি বয়েল',
+    description: '১০০% সুতি ব্রিদেবল কাপড়',
   },
   {
     icon: CheckCircle2,
-    title: 'এডজাস্টেবল ও ফুল কাভারেজ',
-    description: 'মাপ অনুযায়ী ফিতা দিয়ে ছোট-বড় করা যায় এবং বুক পিঠ সম্পূর্ণ কাভার করে',
+    title: 'এডজাস্টেবল সাইজ',
+    description: 'ফিতা দিয়ে সহজে পরিধানযোগ্য',
   },
   {
     icon: Truck,
-    title: 'চাঁদপুর সদর ৫০৳ | ঢাকা ১২০৳',
-    description: 'চাঁদপুরে দ্রুততম হোম ডেলিভারি ও ঢাকায় ১২০ টাকায় ক্যাশ অন ডেলিভারি',
+    title: 'চাঁদপুর ৫০৳ • ঢাকা ১২০৳',
+    description: 'ক্যাশ অন ডেলিভারি',
   },
   {
     icon: ShieldCheck,
-    title: 'ক্যাশ অন ডেলিভারি',
-    description: 'পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ মূল্য পরিশোধের সুবিধা',
+    title: 'চেক করে পেমেন্ট',
+    description: 'হাতে পেয়ে মূল্য পরিশোধের সুবিধা',
   },
 ];
 

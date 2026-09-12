@@ -9,7 +9,7 @@ export default function CategoryPills() {
   return (
     <section className="py-4 sm:py-6 bg-white/70 border-b border-[#F7D6DE]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-3 sm:gap-6 overflow-x-auto pb-2 scrollbar-none justify-start sm:justify-center">
+        <div className="flex items-center gap-4 sm:gap-8 overflow-x-auto pb-2 scrollbar-none justify-start sm:justify-center">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.id}
@@ -28,9 +28,6 @@ export default function CategoryPills() {
               </div>
               <span className="mt-2 text-xs sm:text-sm font-medium text-[#241117] group-hover:text-[#590F23] transition-colors text-center">
                 {cat.banglaName}
-              </span>
-              <span className="text-[10px] text-[#7A5763] font-light">
-                {cat.itemCount}+ আইটেম
               </span>
             </Link>
           ))}

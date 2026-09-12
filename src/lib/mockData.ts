@@ -51,7 +51,6 @@ export const PRODUCTS: Product[] = [
     category: 'lavender',
     price: 550,
     originalPrice: 650,
-    discountBadge: '১০০% খাঁটি বেক্সি',
     images: [
       '/images/products/prayer-hijab-lavender.jpg',
       '/images/products/prayer-hijab-all-1.jpg',
@@ -88,7 +87,6 @@ export const PRODUCTS: Product[] = [
     category: 'mint',
     price: 550,
     originalPrice: 650,
-    discountBadge: '১০০% খাঁটি বেক্সি',
     images: [
       '/images/products/prayer-hijab-mint.jpg',
       '/images/products/prayer-hijab-all-1.jpg',
@@ -124,7 +122,6 @@ export const PRODUCTS: Product[] = [
     category: 'peach',
     price: 550,
     originalPrice: 650,
-    discountBadge: '১০০% খাঁটি বেক্সি',
     images: [
       '/images/products/prayer-hijab-peach.jpg',
       '/images/products/prayer-hijab-all-2.jpg',
@@ -160,7 +157,6 @@ export const PRODUCTS: Product[] = [
     category: 'combo',
     price: 1550,
     originalPrice: 1650,
-    discountBadge: '১০০৳ ছাড় + স্পেশাল অফার',
     images: [
       '/images/products/prayer-hijab-all-1.jpg',
       '/images/products/prayer-hijab-all-2.jpg',

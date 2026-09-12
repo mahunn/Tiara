@@ -10,17 +10,10 @@ export default function CustomerReviews() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F7D6DE] text-[#590F23] text-xs font-semibold">
-            <Heart className="w-3.5 h-3.5 fill-current" />
-            <span>সন্তুষ্ট আপুদের রিভিউ</span>
-          </div>
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-1">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#241117]">
-            আমাদের ক্লায়েন্টদের ভালোবাসা ও প্রতিক্রিয়া
+            গ্রাহকদের প্রতিক্রিয়া
           </h2>
-          <p className="text-xs sm:text-sm text-[#7A5763]">
-            চাঁদপুর, ঢাকা ও সারা বাংলাদেশ থেকে আপুরা তাদের নামাজের হিজাবের জন্য TIARA কেই বেছে নিয়েছেন
-          </p>
         </div>
 
         {/* Reviews Grid */}

@@ -16,7 +16,7 @@ import {
   Phone,
   Check
 } from 'lucide-react';
-import { PRODUCTS } from '@/lib/mockData';
+import { PRODUCTS, MESSENGER_URL } from '@/lib/mockData';
 import { useStore } from '@/lib/store';
 import ProductCard from '@/components/ProductCard';
 
@@ -84,11 +84,6 @@ export default function ProductDetailPage() {
                 priority
                 className="object-cover object-top"
               />
-              {product.discountBadge && (
-                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold text-white bg-[#590F23] rounded-full shadow-md">
-                  {product.discountBadge}
-                </span>
-              )}
             </div>
 
             {/* Thumbnail Row */}
@@ -115,18 +110,13 @@ export default function ProductDetailPage() {
           {/* Right: Details & Order Box */}
           <div className="flex flex-col justify-between space-y-6">
             <div>
-              {/* Rating & Stock */}
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-1.5 text-xs">
-                  <div className="flex text-amber-500">
-                    <Star className="w-4 h-4 fill-current" />
-                  </div>
-                  <span className="font-bold text-[#241117]">{product.rating}</span>
-                  <span className="text-[#7A5763]">({product.reviewCount} টি ভেরিফাইড রিভিউ)</span>
+              {/* Rating */}
+              <div className="flex items-center gap-1.5 text-xs mb-2">
+                <div className="flex text-amber-500">
+                  <Star className="w-4 h-4 fill-current" />
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200">
-                  ইন স্টক • রেডি ডেলিভারি
-                </span>
+                <span className="font-bold text-[#241117]">{product.rating}</span>
+                <span className="text-[#7A5763]">({product.reviewCount} টি ভেরিফাইড রিভিউ)</span>
               </div>
 
               <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#241117]">
@@ -142,11 +132,6 @@ export default function ProductDetailPage() {
                 {product.originalPrice && (
                   <span className="text-base text-[#7A5763] line-through">
                     ৳ {product.originalPrice.toLocaleString()}
-                  </span>
-                )}
-                {product.discountBadge && (
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    {product.discountBadge}
                   </span>
                 )}
               </div>
@@ -243,7 +228,7 @@ export default function ProductDetailPage() {
             <div className="space-y-2.5 pt-4 border-t border-[#F7D6DE]">
               <button
                 onClick={() => openQuickOrder(product, selectedSize, selectedColor)}
-                className="w-full py-3.5 rounded-2xl bg-[#590F23] hover:bg-[#721631] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all active:scale-98 tiara-pulse-ring cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-[#590F23] hover:bg-[#721631] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
               >
                 <Zap className="w-5 h-5 text-[#E7BA83] fill-current" />
                 <span>সরাসরি ক্যাশ অন ডেলিভারিতে অর্ডার করুন</span>
@@ -268,7 +253,7 @@ export default function ProductDetailPage() {
                   <span>হোয়াটসঅ্যাপ অর্ডার</span>
                 </button>
                 <a
-                  href="https://m.me/tiarabd"
+                  href={MESSENGER_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="py-2.5 px-3 rounded-xl bg-[#0084FF] hover:bg-[#0070D6] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors"

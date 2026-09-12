@@ -33,22 +33,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
 
         {/* Category Header Banner with Floral Texture */}
-        <div className="relative rounded-3xl overflow-hidden tiara-banner-pattern border border-[#F7D6DE] shadow-md p-6 sm:p-10 mb-8 sm:mb-12 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 backdrop-blur-xs text-[#590F23] text-xs font-semibold mb-3 border border-[#F7D6DE]">
-            <Sparkles className="w-3.5 h-3.5 text-[#C68E4D]" />
-            <span>এক্সক্লুসিভ কালেকশন</span>
-          </div>
+        <div className="relative rounded-3xl overflow-hidden tiara-banner-pattern border border-[#F7D6DE] shadow-sm p-6 sm:p-10 mb-8 sm:mb-12 text-center">
           <h1 className="font-serif text-2xl sm:text-4xl font-bold text-[#590F23]">
-            {category.banglaName} ({category.name})
+            {category.banglaName}
           </h1>
           {category.description && (
             <p className="text-xs sm:text-sm text-[#241117]/80 max-w-lg mx-auto mt-2 font-light">
               {category.description}
             </p>
           )}
-          <p className="text-xs text-[#7A5763] mt-3">
-            মোট {categoryProducts.length} টি এক্সক্লুসিভ ডিজাইন পাওয়া যাচ্ছে
-          </p>
         </div>
 
         {/* Products Grid */}

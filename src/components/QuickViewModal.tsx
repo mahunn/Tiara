@@ -93,11 +93,6 @@ export default function QuickViewModal() {
                   ৳ {quickViewProduct.originalPrice.toLocaleString()}
                 </span>
               )}
-              {quickViewProduct.discountBadge && (
-                <span className="px-2 py-0.5 text-xs font-bold text-white bg-[#590F23] rounded-full">
-                  {quickViewProduct.discountBadge}
-                </span>
-              )}
             </div>
 
             {/* Description */}

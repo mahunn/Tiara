@@ -22,10 +22,9 @@ export default function Header() {
       {/* 1. Top Announcement Bar */}
       <div className="bg-[#590F23] text-[#FDEEF2] text-xs py-2 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 overflow-hidden text-center w-full sm:w-auto justify-center">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#F7D6DE] animate-pulse"></span>
+          <div className="text-center w-full sm:w-auto">
             <p className="font-medium tracking-wide">
-              🌷 খাঁটি বেক্সি বয়েল নামাজের হিজাব | চাঁদপুরে ডেলিভারি ৫০৳ {`{চাঁদপুর সদর}`}, ঢাকায় ১২০৳ 📦
+              খাঁটি বেক্সি বয়েল নামাজের হিজাব • চাঁদপুরে ডেলিভারি ৫০৳, ঢাকায় ১২০৳
             </p>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-xs font-light text-[#F7D6DE]">

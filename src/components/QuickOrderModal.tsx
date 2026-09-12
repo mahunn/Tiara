@@ -448,7 +448,7 @@ export default function QuickOrderModal() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 rounded-2xl bg-[#590F23] hover:bg-[#721631] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all active:scale-98 disabled:opacity-75 cursor-pointer tiara-pulse-ring"
+                  className="w-full py-3 rounded-2xl bg-[#590F23] hover:bg-[#721631] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 disabled:opacity-75 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

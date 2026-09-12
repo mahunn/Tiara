@@ -39,7 +39,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs text-[#E5B6C3] leading-relaxed">
-              🌷 নামাজের জন্য আরামদায়ক ও বাতাস চলাচল-সহায়ক খাঁটি বেক্সি বয়েল হিজাব, প্রিমিয়াম কটন ইনার ক্যাপ ও ম্যাগনেটিক পিন।
+              নামাজের জন্য আরামদায়ক ও বাতাস চলাচল-সহায়ক খাঁটি বেক্সি বয়েল হিজাব।
             </p>
             <div className="pt-1 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs text-[#F7D6DE] border border-white/10">
@@ -63,7 +63,6 @@ export default function Footer() {
                     className="hover:text-white hover:underline transition-colors flex items-center justify-between"
                   >
                     <span>{cat.banglaName}</span>
-                    <span className="text-[10px] opacity-70">({cat.itemCount})</span>
                   </Link>
                 </li>
               ))}
