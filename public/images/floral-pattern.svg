@@ -1,0 +1,37 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .petal { fill: none; stroke: #7A1934; stroke-width: 1.1; stroke-opacity: 0.11; stroke-linecap: round; stroke-linejoin: round; }
+      .petal-soft { fill: none; stroke: #7A1934; stroke-width: 0.8; stroke-opacity: 0.08; stroke-linecap: round; stroke-linejoin: round; }
+      .flourish { fill: none; stroke: #C99355; stroke-width: 0.9; stroke-opacity: 0.12; stroke-linecap: round; }
+      .shimmer { fill: #7A1934; fill-opacity: 0.06; }
+    </style>
+  </defs>
+
+  <!-- Corner Motif 1: Top-Left Flower cluster -->
+  <g transform="translate(40, 40)">
+    <path class="petal" d="M 50 80 C 40 50, 10 40, 20 20 C 30 0, 70 10, 80 40 C 90 10, 130 0, 140 20 C 150 40, 120 50, 110 80 C 140 90, 150 130, 130 140 C 110 150, 90 120, 80 110 C 70 120, 50 150, 30 140 C 10 130, 20 90, 50 80 Z" />
+    <path class="petal-soft" d="M 60 75 C 52 55, 30 48, 38 32 C 45 18, 70 26, 80 50 C 90 26, 115 18, 122 32 C 130 48, 108 55, 100 75 C 120 82, 130 110, 116 120 C 102 130, 88 108, 80 98 C 72 108, 58 130, 44 120 C 30 110, 40 82, 60 75 Z" />
+    <path class="petal" d="M 80 80 C 70 65, 75 50, 80 45 C 85 50, 90 65, 80 80 Z" />
+    <path class="flourish" d="M 80 110 C 80 160, 40 180, 20 210 C 5 230, 25 250, 40 240 C 60 225, 65 190, 85 170 C 105 190, 110 225, 130 240 C 145 250, 165 230, 150 210 C 130 180, 90 160, 90 110" />
+    <path class="petal-soft" d="M 20 210 C 0 200, -10 170, 5 160 C 20 150, 35 180, 20 210 Z" />
+    <path class="petal-soft" d="M 150 210 C 170 200, 180 170, 165 160 C 150 150, 135 180, 150 210 Z" />
+    <path class="flourish" d="M 80 40 C 70 20, 50 10, 40 -10 C 35 -20, 45 -30, 55 -25 C 65 -20, 60 0, 80 15" />
+    <path class="flourish" d="M 80 40 C 90 20, 110 10, 120 -10 C 125 -20, 115 -30, 105 -25 C 95 -20, 100 0, 80 15" />
+  </g>
+
+  <!-- Bottom-Right Floral Bloom -->
+  <g transform="translate(240, 230)">
+    <path class="petal" d="M 60 70 C 45 40, 15 35, 25 15 C 35 -5, 75 5, 80 35 C 85 5, 125 -5, 135 15 C 145 35, 115 40, 100 70 C 130 80, 140 120, 120 130 C 100 140, 85 110, 80 100 C 75 110, 60 140, 40 130 C 20 120, 30 80, 60 70 Z" />
+    <path class="petal-soft" d="M 80 35 C 70 15, 60 -10, 80 -25 C 100 -10, 90 15, 80 35 Z" />
+    <path class="flourish" d="M 80 100 C 90 140, 130 160, 150 190 C 160 210, 145 225, 130 220 C 115 210, 110 180, 95 160" />
+    <path class="flourish" d="M 80 100 C 70 140, 30 160, 10 190 C 0 210, 15 225, 30 220 C 45 210, 50 180, 65 160" />
+  </g>
+
+  <!-- Delicate scattered micro petals -->
+  <path class="petal-soft" d="M 320 60 C 310 40, 330 30, 340 45 C 350 60, 330 70, 320 60 Z" />
+  <path class="petal-soft" d="M 70 330 C 60 310, 80 300, 90 315 C 100 330, 80 340, 70 330 Z" />
+  <circle cx="200" cy="200" r="1.5" class="shimmer" />
+  <circle cx="340" cy="140" r="1.2" class="shimmer" />
+  <circle cx="60" cy="260" r="1.2" class="shimmer" />
+</svg>

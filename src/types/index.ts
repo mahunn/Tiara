@@ -1,0 +1,87 @@
+export interface Product {
+  id: string;
+  name: string;
+  banglaName?: string;
+  slug: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  discountBadge?: string;
+  images: string[];
+  description: string;
+  fabric?: string;
+  sizes: string[];
+  colors: { name: string; hex: string }[];
+  inStock: boolean;
+  isFeatured?: boolean;
+  isTrending?: boolean;
+  isEidArrival?: boolean;
+  rating: number;
+  reviewCount: number;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  banglaName: string;
+  slug: string;
+  image: string;
+  itemCount: number;
+  description?: string;
+}
+
+export interface CartItem {
+  product: Product;
+  selectedSize: string;
+  selectedColor: string;
+  quantity: number;
+}
+
+export interface OrderCustomer {
+  fullName: string;
+  phone: string;
+  address: string;
+  cityZone: 'inside_dhaka' | 'outside_dhaka';
+  notes?: string;
+}
+
+export interface Order {
+  id?: string;
+  customer: OrderCustomer;
+  items: {
+    productId: string;
+    productName: string;
+    size: string;
+    color: string;
+    quantity: number;
+    price: number;
+  }[];
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+  paymentMethod: 'cash_on_delivery' | 'bkash' | 'nagad';
+  status?: 'pending' | 'processing' | 'shipped' | 'delivered';
+  createdAt?: string;
+}
+
+export interface CustomerReview {
+  id: string;
+  author: string;
+  city: string;
+  rating: number;
+  comment: string;
+  date: string;
+  productName: string;
+  avatar: string;
+}
+
+export interface ReelVideo {
+  id: string;
+  title: string;
+  banglaTitle: string;
+  productId: string;
+  thumbnail: string;
+  videoDuration: string;
+  views: string;
+  price: number;
+}

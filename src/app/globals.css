@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-burgundy: #590F23;
+  --brand-burgundy-hover: #721631;
+  --brand-wine: #68142C;
+  --brand-blush: #F7D6DE;
+  --brand-blush-light: #FDEEF2;
+  --brand-blush-soft: #FAF1F4;
+  --brand-gold: #C68E4D;
+  --brand-gold-light: #E7BA83;
+  --brand-cream: #FFFDFE;
+  --brand-dark: #241117;
+  --brand-muted: #7A5763;
+  --brand-border: #ECD5DC;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom background with floral watermark pattern matching TIARA cover photo */
+.tiara-bg-pattern {
+  background-color: #FAF1F4;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(247, 214, 222, 0.45) 0%, transparent 75%),
+    url('/images/floral-pattern.svg');
+  background-size: auto, 360px 360px;
+  background-repeat: no-repeat, repeat;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.tiara-banner-pattern {
+  background-color: #F8DAE1;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(247, 214, 222, 0.8) 0%, transparent 60%),
+    url('/images/floral-pattern.svg');
+  background-size: auto, auto, 380px 380px;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
+.tiara-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(247, 214, 222, 0.8);
+}
+
+.tiara-glass-dark {
+  background: rgba(89, 15, 35, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(247, 214, 222, 0.2);
+}
+
+.tiara-card-shadow {
+  box-shadow: 0 10px 30px -4px rgba(89, 15, 35, 0.07), 0 2px 8px -2px rgba(89, 15, 35, 0.04);
+}
+
+.tiara-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tiara-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -6px rgba(89, 15, 35, 0.13), 0 6px 12px -2px rgba(89, 15, 35, 0.06);
+}
+
+/* Custom delicate scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF1F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5B6C3;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #590F23;
+}
+
+/* Pulse animation for messenger button */
+@keyframes tiaraPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(89, 15, 35, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(89, 15, 35, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(89, 15, 35, 0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.tiara-pulse-ring {
+  animation: tiaraPulse 2.4s infinite;
+}
+
+/* Smooth transitions */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
