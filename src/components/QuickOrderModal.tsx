@@ -11,13 +11,14 @@ import {
   User, 
   MessageCircle, 
   ShieldCheck, 
-  Sparkles,
-  Loader2
+  Loader2,
+  Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useStore } from '@/lib/store';
 import { saveOrder } from '@/lib/supabase';
-import { Order } from '@/types';
+import { Order, DeliveryZone } from '@/types';
+import { FB_PROFILE_URL, MESSENGER_URL } from '@/lib/mockData';
 
 export default function QuickOrderModal() {
   const { quickOrderProduct, quickOrderOptions, closeQuickOrder } = useStore();
@@ -25,7 +26,7 @@ export default function QuickOrderModal() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [cityZone, setCityZone] = useState<'inside_dhaka' | 'outside_dhaka'>('inside_dhaka');
+  const [cityZone, setCityZone] = useState<DeliveryZone>('chandpur');
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -33,11 +34,10 @@ export default function QuickOrderModal() {
   const [orderSuccess, setOrderSuccess] = useState<{ orderId: string } | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
 
-  // Set initial selected options from store
   React.useEffect(() => {
     if (quickOrderProduct) {
-      setSelectedSize(quickOrderOptions.size || quickOrderProduct.sizes[0] || 'Standard');
-      setSelectedColor(quickOrderOptions.color || quickOrderProduct.colors[0]?.name || 'Standard');
+      setSelectedSize(quickOrderOptions.size || quickOrderProduct.sizes[0] || 'ফ্রি সাইজ');
+      setSelectedColor(quickOrderOptions.color || quickOrderProduct.colors[0]?.name || 'স্ট্যান্ডার্ড');
       setOrderSuccess(null);
       setErrorMsg('');
     }
@@ -45,7 +45,23 @@ export default function QuickOrderModal() {
 
   if (!quickOrderProduct) return null;
 
-  const deliveryFee = cityZone === 'inside_dhaka' ? 70 : 130;
+  // Delivery fee calculation according to client specifications:
+  // চাঁদপুরে ৫০ টাকা {চাঁদপুর সদর}
+  // ঢাকায় ১২০ টাকা
+  // সারা বাংলাদেশ ১৩০ টাকা
+  const getDeliveryFee = (zone: DeliveryZone) => {
+    switch (zone) {
+      case 'chandpur':
+        return 50;
+      case 'dhaka':
+        return 120;
+      case 'outside_dhaka':
+      default:
+        return 130;
+    }
+  };
+
+  const deliveryFee = getDeliveryFee(cityZone);
   const itemTotal = quickOrderProduct.price * quantity;
   const grandTotal = itemTotal + deliveryFee;
 
@@ -65,7 +81,7 @@ export default function QuickOrderModal() {
     }
 
     if (!address.trim()) {
-      setErrorMsg('অনুগ্রহ করে আপনার সম্পূর্ণ ঠিকানা লিখুন');
+      setErrorMsg('অনুগ্রহ করে সম্পূর্ণ ঠিকানা লিখুন (যেমন: বাড়ি/রোড/এলাকা)');
       return;
     }
 
@@ -96,7 +112,6 @@ export default function QuickOrderModal() {
     };
 
     const res = await saveOrder(newOrder);
-
     setIsSubmitting(false);
 
     if (res.success) {
@@ -106,24 +121,18 @@ export default function QuickOrderModal() {
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#590F23', '#F7D6DE', '#C68E4D', '#E8B4C0'],
+          colors: ['#590F23', '#F7D6DE', '#C68E4D', '#B8A4C9', '#A3C4BC'],
         });
       } catch (err) {
-        console.log('Confetti effect', err);
+        console.log(err);
       }
     } else {
-      setErrorMsg('অর্ডার সাবমিট করতে সমস্যা হয়েছে। দয়া করে পুনরায় চেষ্টা করুন বা সরাসরি কল করুন।');
+      setErrorMsg('অর্ডার সাবমিট করতে সমস্যা হয়েছে। দয়া করে মেসেঞ্জারে নক দিন বা পুনরায় চেষ্টা করুন।');
     }
   };
 
-  const handleWhatsAppOrder = () => {
-    const message = `হ্যালো TIARA, আমি এই পণ্যটি অর্ডার করতে চাই:\nপ্রোডাক্ট: ${quickOrderProduct.name}\nসাইজ: ${selectedSize}\nকালার: ${selectedColor}\nমূল্য: ৳${quickOrderProduct.price}\nনাম: ${fullName || '...'}\nফোন: ${phone || '...'}\nঠিকানা: ${address || '...'}`;
-    const url = `https://wa.me/8801700000000?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  };
-
   const handleMessengerOrder = () => {
-    window.open('https://m.me/tiarabd', '_blank');
+    window.open(MESSENGER_URL, '_blank');
   };
 
   return (
@@ -135,7 +144,7 @@ export default function QuickOrderModal() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#590F23] animate-pulse"></span>
             <h3 className="font-serif font-bold text-[#590F23] text-base sm:text-lg">
-              সহজ সরাসরি অর্ডার (ক্যাশ অন ডেলিভারি)
+              সরাসরি অর্ডার করুন (ক্যাশ অন ডেলিভারি)
             </h3>
           </div>
           <button
@@ -160,29 +169,35 @@ export default function QuickOrderModal() {
                   অর্ডার আইডি: #{orderSuccess.orderId}
                 </span>
                 <h4 className="text-xl sm:text-2xl font-serif font-bold text-[#241117] pt-2">
-                  ধন্যবাদ! আপনার অর্ডারটি নিশ্চিত হয়েছে
+                  ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে
                 </h4>
                 <p className="text-xs sm:text-sm text-[#7A5763] max-w-md mx-auto pt-1">
-                  আমাদের কাস্টমার কেয়ার প্রতিনিধি শীঘ্রই আপনার নম্বরে ({phone}) ফোন করে অর্ডারটি কনফার্ম করবেন।
+                  আমাদের প্রতিনিধি শীঘ্রই আপনার নম্বরে ({phone}) কল করে ডেলিভারির তারিখ ও ঠিকানা নিশ্চিত করবেন।
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-[#FAF1F4] border border-[#F7D6DE] max-w-sm mx-auto text-left text-xs space-y-1 text-[#241117]">
                 <div className="flex justify-between font-medium">
-                  <span>প্রোডাক্ট:</span>
+                  <span>পণ্য:</span>
                   <span className="font-bold text-[#590F23]">{quickOrderProduct.banglaName || quickOrderProduct.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>সাইজ ও কালার:</span>
-                  <span>{selectedSize} / {selectedColor}</span>
+                  <span>কালার / ভ্যারিয়েন্ট:</span>
+                  <span>{selectedColor}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>ডেলিভারি এলাকা:</span>
-                  <span>{cityZone === 'inside_dhaka' ? 'ঢাকার ভিতরে (৳৭০)' : 'ঢাকার বাইরে (৳১৩০)'}</span>
+                  <span>
+                    {cityZone === 'chandpur' 
+                      ? 'চাঁদপুর সদর (৫০৳)' 
+                      : cityZone === 'dhaka' 
+                      ? 'ঢাকা সিটি (১২০৳)' 
+                      : 'সারা বাংলাদেশ (১৩০৳)'}
+                  </span>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-[#F7D6DE] font-bold text-sm text-[#590F23]">
                   <span>মোট প্রদেয় টাকা:</span>
-                  <span>৳ {grandTotal.toLocaleString()} (ক্যাশ)</span>
+                  <span>৳ {grandTotal.toLocaleString()} (ক্যাশ অন ডেলিভারি)</span>
                 </div>
               </div>
 
@@ -191,14 +206,14 @@ export default function QuickOrderModal() {
                   onClick={closeQuickOrder}
                   className="px-6 py-2.5 rounded-full bg-[#590F23] text-white font-medium text-xs sm:text-sm hover:bg-[#721631] transition-all shadow-md"
                 >
-                  আরও কেনাকাটা করুন
+                  আরও দেখুন
                 </button>
                 <button
                   onClick={handleMessengerOrder}
-                  className="px-6 py-2.5 rounded-full bg-[#FAF1F4] hover:bg-[#F7D6DE] text-[#590F23] font-medium text-xs sm:text-sm border border-[#F7D6DE] transition-all flex items-center justify-center gap-1.5"
+                  className="px-6 py-2.5 rounded-full bg-[#0084FF] hover:bg-[#0070D6] text-white font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 shadow-sm"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>মেসেঞ্জারে নক দিন</span>
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>মেসেঞ্জারে ইনবক্স করুন</span>
                 </button>
               </div>
             </div>
@@ -207,21 +222,24 @@ export default function QuickOrderModal() {
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Product Preview Card */}
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#FAF1F4] border border-[#F7D6DE]/80">
-                <div className="relative w-16 h-20 rounded-xl overflow-hidden bg-white flex-shrink-0 border border-[#F7D6DE]">
+              <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#FAF1F4] border border-[#F7D6DE]">
+                <div className="relative w-18 h-20 rounded-xl overflow-hidden bg-white flex-shrink-0 border border-[#F7D6DE]">
                   <Image
                     src={quickOrderProduct.images[0]}
                     alt={quickOrderProduct.name}
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-center"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-serif font-bold text-sm text-[#241117] truncate">
+                  <h4 className="font-serif font-bold text-sm text-[#241117] line-clamp-1">
                     {quickOrderProduct.banglaName || quickOrderProduct.name}
                   </h4>
-                  <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-sm font-bold text-[#590F23]">
+                  <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                    ✓ খাঁটি বেক্সি বয়েল কাপড় • বাতাস চলাচল-সহায়ক
+                  </p>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-base font-bold text-[#590F23]">
                       ৳ {quickOrderProduct.price.toLocaleString()}
                     </span>
                     {quickOrderProduct.originalPrice && (
@@ -230,9 +248,9 @@ export default function QuickOrderModal() {
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-2 mt-2">
                     <span className="text-[11px] text-[#7A5763]">পরিমাণ:</span>
-                    <div className="flex items-center border border-[#F7D6DE] bg-white rounded-lg px-1.5 py-0.5">
+                    <div className="flex items-center border border-[#F7D6DE] bg-white rounded-lg px-2 py-0.5">
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -253,91 +271,86 @@ export default function QuickOrderModal() {
                 </div>
               </div>
 
-              {/* Size & Color Selection */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-[#241117] mb-1.5">
-                    সাইজ বেছে নিন:
-                  </label>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {quickOrderProduct.sizes.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setSelectedSize(s)}
-                        className={`px-3 py-1.5 text-xs rounded-xl font-medium transition-all ${
-                          selectedSize === s
-                            ? 'bg-[#590F23] text-white shadow-xs'
-                            : 'bg-[#FAF1F4] text-[#241117] hover:bg-[#F7D6DE] border border-[#F7D6DE]'
-                        }`}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#241117] mb-1.5">
-                    কালার:
-                  </label>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {quickOrderProduct.colors.map((c) => (
-                      <button
-                        key={c.name}
-                        type="button"
-                        onClick={() => setSelectedColor(c.name)}
-                        className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-xl font-medium transition-all border ${
-                          selectedColor === c.name
-                            ? 'border-[#590F23] bg-[#FAF1F4] text-[#590F23] font-bold shadow-xs'
-                            : 'border-[#F7D6DE] bg-white text-[#7A5763]'
-                        }`}
-                      >
-                        <span
-                          className="w-3 h-3 rounded-full border border-black/10"
-                          style={{ backgroundColor: c.hex }}
-                        />
-                        <span>{c.name}</span>
-                      </button>
-                    ))}
-                  </div>
+              {/* Color Selection */}
+              <div>
+                <label className="block text-xs font-semibold text-[#241117] mb-1.5">
+                  কালার পছন্দ করুন: <span className="text-[#590F23]">{selectedColor}</span>
+                </label>
+                <div className="flex gap-2 flex-wrap">
+                  {quickOrderProduct.colors.map((c) => (
+                    <button
+                      key={c.name}
+                      type="button"
+                      onClick={() => setSelectedColor(c.name)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-xl font-medium transition-all border ${
+                        selectedColor === c.name
+                          ? 'border-[#590F23] bg-[#FAF1F4] text-[#590F23] font-bold shadow-xs ring-1 ring-[#590F23]'
+                          : 'border-[#F7D6DE] bg-white text-[#7A5763] hover:bg-[#FAF1F4]'
+                      }`}
+                    >
+                      <span
+                        className="w-3.5 h-3.5 rounded-full border border-black/10"
+                        style={{ backgroundColor: c.hex }}
+                      />
+                      <span>{c.name}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Delivery Zone Selection (Inside / Outside Dhaka) */}
+              {/* Delivery Zone Selection (Chandpur vs Dhaka vs Outside) */}
               <div>
                 <label className="block text-xs font-semibold text-[#241117] mb-1.5">
                   ডেলিভারি এলাকা নির্বাচন করুন:
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {/* Chandpur */}
                   <button
                     type="button"
-                    onClick={() => setCityZone('inside_dhaka')}
-                    className={`flex items-center justify-between p-3 rounded-2xl border text-left transition-all ${
-                      cityZone === 'inside_dhaka'
+                    onClick={() => setCityZone('chandpur')}
+                    className={`flex items-center justify-between p-2.5 rounded-2xl border text-left transition-all ${
+                      cityZone === 'chandpur'
                         ? 'border-[#590F23] bg-[#FAF1F4] ring-1 ring-[#590F23]'
                         : 'border-[#F7D6DE] bg-white hover:bg-[#FAF1F4]'
                     }`}
                   >
                     <div>
-                      <p className="text-xs font-bold text-[#241117]">ঢাকার ভিতরে</p>
-                      <p className="text-[11px] text-[#7A5763]">হোম ডেলিভারি</p>
+                      <p className="text-xs font-bold text-[#241117]">চাঁদপুর সদর</p>
+                      <p className="text-[10px] text-[#7A5763]">চাঁদপুর জেলা</p>
                     </div>
-                    <span className="text-xs font-bold text-[#590F23]">৳ ৭০</span>
+                    <span className="text-xs font-bold text-[#590F23]">৳ ৫০</span>
                   </button>
 
+                  {/* Dhaka */}
+                  <button
+                    type="button"
+                    onClick={() => setCityZone('dhaka')}
+                    className={`flex items-center justify-between p-2.5 rounded-2xl border text-left transition-all ${
+                      cityZone === 'dhaka'
+                        ? 'border-[#590F23] bg-[#FAF1F4] ring-1 ring-[#590F23]'
+                        : 'border-[#F7D6DE] bg-white hover:bg-[#FAF1F4]'
+                    }`}
+                  >
+                    <div>
+                      <p className="text-xs font-bold text-[#241117]">ঢাকা সিটি</p>
+                      <p className="text-[10px] text-[#7A5763]">হোম ডেলিভারি</p>
+                    </div>
+                    <span className="text-xs font-bold text-[#590F23]">৳ ১২০</span>
+                  </button>
+
+                  {/* Outside Dhaka */}
                   <button
                     type="button"
                     onClick={() => setCityZone('outside_dhaka')}
-                    className={`flex items-center justify-between p-3 rounded-2xl border text-left transition-all ${
+                    className={`flex items-center justify-between p-2.5 rounded-2xl border text-left transition-all ${
                       cityZone === 'outside_dhaka'
                         ? 'border-[#590F23] bg-[#FAF1F4] ring-1 ring-[#590F23]'
                         : 'border-[#F7D6DE] bg-white hover:bg-[#FAF1F4]'
                     }`}
                   >
                     <div>
-                      <p className="text-xs font-bold text-[#241117]">ঢাকার বাইরে</p>
-                      <p className="text-[11px] text-[#7A5763]">সারা বাংলাদেশ</p>
+                      <p className="text-xs font-bold text-[#241117]">সারা বাংলাদেশ</p>
+                      <p className="text-[10px] text-[#7A5763]">অন্যান্য জেলা</p>
                     </div>
                     <span className="text-xs font-bold text-[#590F23]">৳ ১৩০</span>
                   </button>
@@ -349,7 +362,7 @@ export default function QuickOrderModal() {
                 {/* Full Name */}
                 <div>
                   <label className="block text-xs font-semibold text-[#241117] mb-1">
-                    আপনার নাম (Full Name) *
+                    আপনার নাম *
                   </label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7A5763]" />
@@ -358,7 +371,7 @@ export default function QuickOrderModal() {
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="যেমন: তানজিলা ইসলাম"
+                      placeholder="যেমন: রাবেয়া খাতুন"
                       className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-[#F7D6DE] rounded-xl text-xs sm:text-sm text-[#241117] focus:outline-none focus:border-[#590F23] focus:ring-1 focus:ring-[#590F23]"
                     />
                   </div>
@@ -383,10 +396,10 @@ export default function QuickOrderModal() {
                   </div>
                 </div>
 
-                {/* Full Delivery Address */}
+                {/* Delivery Address */}
                 <div>
                   <label className="block text-xs font-semibold text-[#241117] mb-1">
-                    সম্পূর্ণ ঠিকানা (বাসা/রোড/এলাকা/জেলা) *
+                    সম্পূর্ণ ঠিকানা (বাসা/রোড/এলাকা/উপজেলা) *
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-3.5 top-3 w-4 h-4 text-[#7A5763]" />
@@ -395,7 +408,7 @@ export default function QuickOrderModal() {
                       rows={2}
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      placeholder="যেমন: বাসা ১২, রোড ৪, সেক্টর ৭, উত্তরা, ঢাকা"
+                      placeholder="যেমন: নতুন বাজার, চাঁদপুর সদর অথবা রোড ১২, মিরপুর, ঢাকা"
                       className="w-full pl-10 pr-3.5 py-2 bg-white border border-[#F7D6DE] rounded-xl text-xs sm:text-sm text-[#241117] focus:outline-none focus:border-[#590F23] focus:ring-1 focus:ring-[#590F23]"
                     />
                   </div>
@@ -405,7 +418,7 @@ export default function QuickOrderModal() {
               {/* Price Calculation Summary */}
               <div className="p-3.5 rounded-2xl bg-[#FAF1F4] border border-[#F7D6DE] space-y-1 text-xs text-[#241117]">
                 <div className="flex justify-between">
-                  <span className="text-[#7A5763]">পণ্যের দাম:</span>
+                  <span className="text-[#7A5763]">পণ্যের দাম ({quantity} পিস):</span>
                   <span>৳ {itemTotal.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
@@ -450,25 +463,15 @@ export default function QuickOrderModal() {
                   )}
                 </button>
 
-                {/* WhatsApp & Messenger Quick Option */}
-                <div className="grid grid-cols-2 gap-2 pt-1">
-                  <button
-                    type="button"
-                    onClick={handleWhatsAppOrder}
-                    className="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    <span>হোয়াটসঅ্যাপে অর্ডার</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleMessengerOrder}
-                    className="py-2 px-3 rounded-xl bg-[#0084FF] hover:bg-[#0070D6] text-white font-medium text-xs flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5" />
-                    <span>মেসেঞ্জারে অর্ডার</span>
-                  </button>
-                </div>
+                {/* Direct Messenger Order Option */}
+                <button
+                  type="button"
+                  onClick={handleMessengerOrder}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#0084FF] hover:bg-[#0070D6] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-sm"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>ফেসবুক মেসেঞ্জারে ইনবক্স করে অর্ডার করুন</span>
+                </button>
               </div>
             </form>
           )}

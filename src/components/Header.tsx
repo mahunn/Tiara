@@ -8,12 +8,12 @@ import {
   Search, 
   Menu, 
   PhoneCall, 
-  Heart, 
   X,
-  ChevronDown
+  ChevronDown,
+  MessageCircle
 } from 'lucide-react';
 import { useStore } from '@/lib/store';
-import { CATEGORIES } from '@/lib/mockData';
+import { CATEGORIES, MESSENGER_URL, FB_PROFILE_URL } from '@/lib/mockData';
 
 export default function Header() {
   const { cartCount, setIsCartOpen, setIsCategoryDrawerOpen, isSearchOpen, setIsSearchOpen } = useStore();
@@ -21,31 +21,24 @@ export default function Header() {
 
   return (
     <>
-      {/* 1. Top Announcement Bar for BD Audience */}
+      {/* 1. Top Announcement Bar */}
       <div className="bg-[#590F23] text-[#FDEEF2] text-xs py-2 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2 overflow-hidden text-center w-full sm:w-auto justify-center">
             <span className="inline-block w-2 h-2 rounded-full bg-[#F7D6DE] animate-pulse"></span>
             <p className="font-medium tracking-wide">
-              🌸 সারা বাংলাদেশে ক্যাশ অন ডেলিভারি | ৩০০০৳ অর্ডারে ডেলিভারি চার্জ ফ্রি!
+              🌷 খাঁটি বেক্সি বয়েল নামাজের হিজাব | ডেলিভারি: চাঁদপুরে ৫০৳ {`{চাঁদপুর সদর}`}, ঢাকায় ১২০৳ 📦
             </p>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-xs font-light text-[#F7D6DE]">
             <a 
-              href="tel:+8801700000000" 
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
-            >
-              <PhoneCall className="w-3.5 h-3.5" />
-              <span>হেল্পলাইন: ০১৭০০-০০০০০০</span>
-            </a>
-            <span className="opacity-40">|</span>
-            <a 
-              href="https://m.me/tiarabd" 
+              href={MESSENGER_URL}
               target="_blank" 
               rel="noreferrer"
-              className="hover:text-white transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
-              মেসেঞ্জার সাপোর্ট
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span>মেসেঞ্জারে অর্ডার করুন</span>
             </a>
           </div>
         </div>
@@ -73,46 +66,23 @@ export default function Header() {
                 >
                   হোম (Home)
                 </Link>
-                <div className="relative group py-2">
-                  <button 
-                    onClick={() => setIsCategoryDrawerOpen(true)}
-                    className="flex items-center gap-1 hover:text-[#590F23] transition-colors py-1"
-                  >
-                    <span>কালেকশন</span>
-                    <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform" />
-                  </button>
-                  <div className="absolute top-full left-0 w-64 bg-white tiara-glass rounded-2xl p-3 shadow-xl border border-[#F7D6DE] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200">
-                    <div className="space-y-1">
-                      {CATEGORIES.map((cat) => (
-                        <Link
-                          key={cat.id}
-                          href={`/category/${cat.slug}`}
-                          className="flex items-center justify-between px-3 py-2 text-xs font-medium text-[#241117] hover:text-[#590F23] hover:bg-[#FAF1F4] rounded-xl transition-colors"
-                        >
-                          <span>{cat.name}</span>
-                          <span className="text-[10px] text-[#7A5763] font-normal">{cat.banglaName}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
                 <Link 
-                  href="/category/abayas" 
+                  href="/category/prayer-hijab" 
                   className="hover:text-[#590F23] transition-colors"
                 >
-                  আবায়া
+                  নামাজের হিজাব
                 </Link>
                 <Link 
-                  href="/category/gowns" 
+                  href="/category/inner-cap" 
                   className="hover:text-[#590F23] transition-colors"
                 >
-                  ফেস্টিভ গাউন
+                  ইনার ক্যাপ
                 </Link>
                 <Link 
-                  href="/category/hijabs" 
+                  href="/category/hijab-pins" 
                   className="hover:text-[#590F23] transition-colors"
                 >
-                  খিমার ও হিজাব
+                  হিজাব পিন
                 </Link>
               </nav>
             </div>
@@ -171,7 +141,7 @@ export default function Header() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="আবায়া, গাউন, খিমার বা কো-অর্ড খুঁজুন..."
+                  placeholder="নামাজের হিজাব, ইনার ক্যাপ বা হিজাব পিন খুঁজুন..."
                   className="w-full pl-11 pr-4 py-2.5 bg-white rounded-full border border-[#F7D6DE] text-sm text-[#241117] focus:outline-none focus:border-[#590F23] shadow-xs"
                   autoFocus
                 />

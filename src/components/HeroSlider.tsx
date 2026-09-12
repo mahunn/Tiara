@@ -8,35 +8,35 @@ import { ChevronLeft, ChevronRight, Sparkles, ShoppingBag } from 'lucide-react';
 const SLIDES = [
   {
     id: 1,
-    badge: 'NEW ARRIVAL 2026',
+    badge: 'NEW ARRIVAL',
     title: 'TIARA Signature Modest Collection',
-    banglaTitle: 'ঈদ ও উৎসবের আভিজাত্য',
-    subtitle: 'প্রিমিয়াম দুবাই চেরি সিল্ক ও নিখুঁত কারচুপির সূক্ষ্ম শিল্পকর্ম',
+    banglaTitle: 'বেক্সি বয়েল নামাজের হিজাব',
+    subtitle: 'খাঁটি বেক্সি বয়েল কাপড় দিয়ে তৈরি • বাতাস চলাচল-সহায়ক • ফুল কাভারেজ',
     image: '/images/tiara-cover.png',
-    link: '/category/abayas',
+    link: '/category/prayer-hijab',
     buttonText: 'কালেকশন দেখুন',
     isBrandBanner: true,
   },
   {
     id: 2,
-    badge: 'EID SPECIAL',
-    title: 'Royal Handwork Festive Gowns',
-    banglaTitle: 'রাজকীয় ফেস্টিভ গাউন কালেকশন',
-    subtitle: 'খাঁটি অরগানজা ও সিল্কে তৈরি মনোমুগ্ধকর আধুনিক গাউন',
-    image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1600&auto=format&fit=crop',
-    link: '/category/gowns',
-    buttonText: 'গাউন দেখুন',
+    badge: '১ পিসের দাম ৫৫০৳',
+    title: 'Pure Bexi Boil Breathable Prayer Hijab',
+    banglaTitle: 'নামাজের জন্য আরামদায়ক হিজাব',
+    subtitle: 'ল্যাভেন্ডার, মিন্ট ও পিচ ফ্লোরাল • মাপ অনুযায়ী ছোট-বড় করা যায় (Adjustable)',
+    image: '/images/products/prayer-hijab-all-1.jpg',
+    link: '/category/prayer-hijab',
+    buttonText: 'অর্ডার করুন (৫৫০৳)',
     isBrandBanner: false,
   },
   {
     id: 3,
-    badge: 'BESTSELLER',
-    title: 'Flowing French Chiffon Khimars',
-    banglaTitle: 'ফ্রেঞ্চ শিফন খিমার ও হিজাব সেট',
-    subtitle: 'পরম আরামদায়ক, অ্যান্টি-স্লিপ ফ্যাব্রিক ও চমৎকার কাটিং',
-    image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=1600&auto=format&fit=crop',
-    link: '/category/hijabs',
-    buttonText: 'খিমার কালেকশন',
+    badge: 'স্পেশাল কম্বো অফার',
+    title: '3-Piece Prayer Hijab Combo',
+    banglaTitle: '৩ কালার স্পেশাল কম্বো প্যাক',
+    subtitle: 'চাঁদপুর সদরে ডেলিভারি চার্জ মাত্র ৫০ টাকা | ঢাকায় ডেলিভারি ১২০ টাকা',
+    image: '/images/products/prayer-hijab-all-2.jpg',
+    link: '/category/prayer-hijab',
+    buttonText: 'কম্বো প্যাক দেখুন',
     isBrandBanner: false,
   },
 ];
@@ -70,7 +70,7 @@ export default function HeroSlider() {
                 index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
-              {/* Slide Image / Background */}
+              {/* Slide Image */}
               <div className="relative w-full h-full">
                 <Image
                   src={slide.image}
@@ -80,24 +80,23 @@ export default function HeroSlider() {
                   className={slide.isBrandBanner ? 'object-cover sm:object-contain object-center' : 'object-cover object-center'}
                 />
 
-                {/* Soft gradient overlay for text readability when not brand banner */}
                 {!slide.isBrandBanner && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#590F23]/80 via-[#590F23]/40 to-transparent flex items-center">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#590F23]/85 via-[#590F23]/50 to-transparent flex items-center">
                     <div className="px-6 sm:px-12 md:px-16 max-w-xl text-white space-y-3 sm:space-y-4">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[#FDEEF2] text-xs font-semibold tracking-wider">
                         <Sparkles className="w-3.5 h-3.5 text-[#E7BA83]" />
                         <span>{slide.badge}</span>
                       </div>
-                      <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight">
+                      <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight drop-shadow-sm">
                         {slide.banglaTitle}
                       </h2>
-                      <p className="text-xs sm:text-base text-[#FDEEF2]/90 font-light max-w-md line-clamp-2">
+                      <p className="text-xs sm:text-base text-[#FDEEF2]/95 font-light max-w-md line-clamp-2">
                         {slide.subtitle}
                       </p>
                       <div className="pt-2">
                         <Link
                           href={slide.link}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full bg-white text-[#590F23] font-semibold text-xs sm:text-sm hover:bg-[#F7D6DE] transition-all shadow-md active:scale-95"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full bg-white text-[#590F23] font-bold text-xs sm:text-sm hover:bg-[#F7D6DE] transition-all shadow-md active:scale-95"
                         >
                           <ShoppingBag className="w-4 h-4" />
                           <span>{slide.buttonText}</span>
@@ -107,15 +106,14 @@ export default function HeroSlider() {
                   </div>
                 )}
 
-                {/* For Brand Banner slide: Subtle floating CTA */}
                 {slide.isBrandBanner && (
                   <div className="absolute bottom-3 right-4 sm:bottom-6 sm:right-8 z-20">
                     <Link
                       href={slide.link}
-                      className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#590F23] text-white font-medium text-xs sm:text-sm hover:bg-[#721631] transition-all shadow-lg active:scale-95 tiara-pulse-ring"
+                      className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#590F23] text-white font-semibold text-xs sm:text-sm hover:bg-[#721631] transition-all shadow-lg active:scale-95 tiara-pulse-ring"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-[#E7BA83]" />
-                      <span>কালেকশন দেখুন</span>
+                      <span>নামাজের হিজাব দেখুন</span>
                     </Link>
                   </div>
                 )}

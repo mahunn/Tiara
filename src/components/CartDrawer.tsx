@@ -13,12 +13,14 @@ import {
   User,
   MapPin,
   Loader2,
-  CheckCircle2
+  CheckCircle2,
+  MessageCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useStore } from '@/lib/store';
 import { saveOrder } from '@/lib/supabase';
-import { Order } from '@/types';
+import { Order, DeliveryZone } from '@/types';
+import { MESSENGER_URL } from '@/lib/mockData';
 
 export default function CartDrawer() {
   const { 
@@ -36,7 +38,7 @@ export default function CartDrawer() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [cityZone, setCityZone] = useState<'inside_dhaka' | 'outside_dhaka'>('inside_dhaka');
+  const [cityZone, setCityZone] = useState<DeliveryZone>('chandpur');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState<{ orderId: string } | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -47,7 +49,14 @@ export default function CartDrawer() {
   const progressPercent = Math.min(100, Math.round((cartSubtotal / FREE_SHIPPING_THRESHOLD) * 100));
   const diffToFree = Math.max(0, FREE_SHIPPING_THRESHOLD - cartSubtotal);
 
-  const deliveryFee = cartSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : (cityZone === 'inside_dhaka' ? 70 : 130);
+  const getDeliveryFee = (zone: DeliveryZone) => {
+    if (cartSubtotal >= FREE_SHIPPING_THRESHOLD) return 0;
+    if (zone === 'chandpur') return 50;
+    if (zone === 'dhaka') return 120;
+    return 130;
+  };
+
+  const deliveryFee = getDeliveryFee(cityZone);
   const grandTotal = cartSubtotal + deliveryFee;
 
   const handleCheckoutSubmit = async (e: React.FormEvent) => {
@@ -103,13 +112,13 @@ export default function CartDrawer() {
           particleCount: 90,
           spread: 80,
           origin: { y: 0.6 },
-          colors: ['#590F23', '#F7D6DE', '#C68E4D'],
+          colors: ['#590F23', '#F7D6DE', '#C68E4D', '#B8A4C9', '#A3C4BC'],
         });
       } catch (err) {
         console.log(err);
       }
     } else {
-      setErrorMsg('অর্ডার সাবমিট হতে সমস্যা হয়েছে। দয়া করে পুনরায় চেষ্টা করুন।');
+      setErrorMsg('অর্ডার সাবমিট হতে সমস্যা হয়েছে। দয়া করে মেসেঞ্জারে জানান।');
     }
   };
 
@@ -141,30 +150,14 @@ export default function CartDrawer() {
             </button>
           </div>
 
-          {/* Free Shipping Progress Indicator */}
+          {/* Delivery Note */}
           <div className="px-5 py-2.5 bg-[#FDEEF2] border-b border-[#F7D6DE] text-xs">
-            {diffToFree > 0 ? (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[#590F23] font-medium">
-                  <span className="flex items-center gap-1">
-                    <Truck className="w-3.5 h-3.5" />
-                    <span>আর ৳{diffToFree.toLocaleString()} টাকার অর্ডারে ফ্রি ডেলিভারি!</span>
-                  </span>
-                  <span>{progressPercent}%</span>
-                </div>
-                <div className="w-full h-1.5 bg-[#F7D6DE] rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-[#590F23] rounded-full transition-all duration-500"
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center gap-1.5 text-emerald-800 font-semibold justify-center">
-                <Sparkles className="w-4 h-4 text-emerald-600" />
-                <span>অভিনন্দন! আপনার ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</span>
-              </div>
-            )}
+            <div className="flex items-center justify-between text-[#590F23] font-medium">
+              <span className="flex items-center gap-1">
+                <Truck className="w-3.5 h-3.5" />
+                <span>ডেলিভারি: চাঁদপুর সদর ৫০৳ • ঢাকা ১২০৳</span>
+              </span>
+            </div>
           </div>
 
           {/* Body */}
@@ -182,18 +175,29 @@ export default function CartDrawer() {
                   অর্ডার আইডি: #{orderSuccess.orderId}
                 </p>
                 <p className="text-xs text-[#7A5763] max-w-xs mx-auto">
-                  আমাদের প্রতিনিধি শীঘ্রই আপনার নাম্বারে কল করে অর্ডারটি নিশ্চিত করবেন।
+                  আমাদের প্রতিনিধি শীঘ্রই আপনার নম্বরে কল করে অর্ডারটি কনফার্ম করবেন।
                 </p>
-                <button
-                  onClick={() => {
-                    setOrderSuccess(null);
-                    setIsCheckingOut(false);
-                    setIsCartOpen(false);
-                  }}
-                  className="px-6 py-2.5 rounded-full bg-[#590F23] text-white text-xs font-semibold hover:bg-[#721631]"
-                >
-                  আরও কেনাকাটা করুন
-                </button>
+                <div className="pt-2 flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      setOrderSuccess(null);
+                      setIsCheckingOut(false);
+                      setIsCartOpen(false);
+                    }}
+                    className="px-6 py-2.5 rounded-full bg-[#590F23] text-white text-xs font-semibold hover:bg-[#721631]"
+                  >
+                    আরও কেনাকাটা করুন
+                  </button>
+                  <a
+                    href={MESSENGER_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-6 py-2 rounded-full bg-[#0084FF] text-white text-xs font-semibold hover:bg-[#0070D6] flex items-center justify-center gap-1.5"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>মেসেঞ্জারে ইনবক্স করুন</span>
+                  </a>
+                </div>
               </div>
             ) : isCheckingOut ? (
               /* Inline Fast Checkout Form */
@@ -248,28 +252,39 @@ export default function CartDrawer() {
                   <label className="block text-xs font-semibold text-[#241117] mb-1">
                     ডেলিভারি এলাকা *
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5">
                     <button
                       type="button"
-                      onClick={() => setCityZone('inside_dhaka')}
-                      className={`p-2.5 rounded-xl border text-xs font-medium text-left ${
-                        cityZone === 'inside_dhaka'
+                      onClick={() => setCityZone('chandpur')}
+                      className={`p-2 rounded-xl border text-[11px] font-medium text-center ${
+                        cityZone === 'chandpur'
                           ? 'border-[#590F23] bg-[#FAF1F4] text-[#590F23] font-bold'
                           : 'border-[#F7D6DE] bg-white text-[#7A5763]'
                       }`}
                     >
-                      ঢাকার ভিতরে (৳৭০)
+                      চাঁদপুর (৫০৳)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCityZone('dhaka')}
+                      className={`p-2 rounded-xl border text-[11px] font-medium text-center ${
+                        cityZone === 'dhaka'
+                          ? 'border-[#590F23] bg-[#FAF1F4] text-[#590F23] font-bold'
+                          : 'border-[#F7D6DE] bg-white text-[#7A5763]'
+                      }`}
+                    >
+                      ঢাকা (১২০৳)
                     </button>
                     <button
                       type="button"
                       onClick={() => setCityZone('outside_dhaka')}
-                      className={`p-2.5 rounded-xl border text-xs font-medium text-left ${
+                      className={`p-2 rounded-xl border text-[11px] font-medium text-center ${
                         cityZone === 'outside_dhaka'
                           ? 'border-[#590F23] bg-[#FAF1F4] text-[#590F23] font-bold'
                           : 'border-[#F7D6DE] bg-white text-[#7A5763]'
                       }`}
                     >
-                      ঢাকার বাইরে (৳১৩০)
+                      অন্য জেলা (১৩০৳)
                     </button>
                   </div>
                 </div>
@@ -285,7 +300,7 @@ export default function CartDrawer() {
                       rows={2}
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      placeholder="বাসা নম্বর, রোড, এলাকা, থানা, জেলা"
+                      placeholder="বাসা নম্বর, রোড, এলাকা, উপজেলা/থানা"
                       className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-xs text-[#241117] focus:outline-none focus:border-[#590F23]"
                     />
                   </div>
@@ -304,7 +319,7 @@ export default function CartDrawer() {
                   </div>
                   <div className="flex justify-between">
                     <span>ডেলিভারি চার্জ:</span>
-                    <span>{deliveryFee === 0 ? 'ফ্রি' : `৳ ${deliveryFee}`}</span>
+                    <span>৳ {deliveryFee}</span>
                   </div>
                   <div className="flex justify-between pt-1 border-t border-[#F7D6DE] font-bold text-sm text-[#590F23]">
                     <span>সর্বমোট:</span>
@@ -339,7 +354,7 @@ export default function CartDrawer() {
                   আপনার শপিং ব্যাগটি খালি
                 </h4>
                 <p className="text-xs text-[#7A5763] max-w-xs mx-auto">
-                  পছন্দের আবায়া, গাউন বা খিমার দেখতে কালেকশনে ঘুরে আসুন
+                  বেক্সি বয়েল নামাজের হিজাব দেখতে কালেকশনে ঘুরে আসুন
                 </p>
                 <button
                   onClick={() => setIsCartOpen(false)}
@@ -361,7 +376,7 @@ export default function CartDrawer() {
                         src={item.product.images[0]}
                         alt={item.product.name}
                         fill
-                        className="object-cover object-top"
+                        className="object-cover object-center"
                       />
                     </div>
 
@@ -370,7 +385,7 @@ export default function CartDrawer() {
                         {item.product.banglaName || item.product.name}
                       </h4>
                       <p className="text-[11px] text-[#7A5763] mt-0.5">
-                        সাইজ: <span className="font-medium text-[#241117]">{item.selectedSize}</span> | কালার: <span className="font-medium text-[#241117]">{item.selectedColor}</span>
+                        কালার: <span className="font-medium text-[#241117]">{item.selectedColor}</span>
                       </p>
                       
                       <div className="flex items-center justify-between mt-2">
@@ -415,7 +430,6 @@ export default function CartDrawer() {
                       </div>
                     </div>
 
-                    {/* Delete Item Button */}
                     <button
                       onClick={() =>
                         removeFromCart(item.product.id, item.selectedSize, item.selectedColor)
@@ -439,8 +453,8 @@ export default function CartDrawer() {
                 <span className="text-sm font-bold text-[#241117]">৳ {cartSubtotal.toLocaleString()}</span>
               </div>
               <div className="flex items-center justify-between text-xs text-[#7A5763]">
-                <span>আনুমানিক ডেলিভারি:</span>
-                <span>{diffToFree === 0 ? 'ফ্রি' : '৳ ৭০ / ৳ ১৩০'}</span>
+                <span>ডেলিভারি চার্জ:</span>
+                <span>চাঁদপুর সদর ৫০৳ • ঢাকা ১২০৳</span>
               </div>
               <div className="pt-2 border-t border-[#F7D6DE] flex items-baseline justify-between">
                 <span className="font-serif font-bold text-sm text-[#241117]">মোট প্রদেয়:</span>

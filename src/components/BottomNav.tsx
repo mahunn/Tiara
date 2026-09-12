@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Home, LayoutGrid, ShoppingBag, MessageCircle } from 'lucide-react';
 import { useStore } from '@/lib/store';
+import { MESSENGER_URL } from '@/lib/mockData';
 
 export default function BottomNav() {
   const { cartCount, setIsCartOpen, setIsCategoryDrawerOpen } = useStore();
@@ -51,9 +52,9 @@ export default function BottomNav() {
           <span className="text-[10px] font-medium">ব্যাগ</span>
         </button>
 
-        {/* 4. Facebook / Messenger Button in Bottom Right (User Explicit Requirement!) */}
+        {/* 4. Facebook / Messenger Button in Bottom Right */}
         <a
-          href="https://m.me/tiarabd"
+          href={MESSENGER_URL}
           target="_blank"
           rel="noreferrer"
           className="flex flex-col items-center gap-1 text-[#0084FF] hover:opacity-90 transition-all active:scale-95"

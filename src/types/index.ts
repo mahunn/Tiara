@@ -3,25 +3,25 @@ export interface Product {
   name: string;
   banglaName?: string;
   slug: string;
-  category: string;
+  category: 'prayer-hijab' | 'inner-cap' | 'hijab-pins';
   price: number;
   originalPrice?: number;
   discountBadge?: string;
   images: string[];
   description: string;
+  bulletPoints?: string[];
   fabric?: string;
   sizes: string[];
   colors: { name: string; hex: string }[];
   inStock: boolean;
   isFeatured?: boolean;
   isTrending?: boolean;
-  isEidArrival?: boolean;
   rating: number;
   reviewCount: number;
 }
 
 export interface Category {
-  id: string;
+  id: 'prayer-hijab' | 'inner-cap' | 'hijab-pins';
   name: string;
   banglaName: string;
   slug: string;
@@ -37,11 +37,13 @@ export interface CartItem {
   quantity: number;
 }
 
+export type DeliveryZone = 'chandpur' | 'dhaka' | 'outside_dhaka';
+
 export interface OrderCustomer {
   fullName: string;
   phone: string;
   address: string;
-  cityZone: 'inside_dhaka' | 'outside_dhaka';
+  cityZone: DeliveryZone;
   notes?: string;
 }
 
@@ -73,15 +75,4 @@ export interface CustomerReview {
   date: string;
   productName: string;
   avatar: string;
-}
-
-export interface ReelVideo {
-  id: string;
-  title: string;
-  banglaTitle: string;
-  productId: string;
-  thumbnail: string;
-  videoDuration: string;
-  views: string;
-  price: number;
 }

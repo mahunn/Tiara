@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { MessageCircle, X, ExternalLink } from 'lucide-react';
+import { FB_PROFILE_URL, MESSENGER_URL } from '@/lib/mockData';
 
 export default function MessengerWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,27 +30,27 @@ export default function MessengerWidget() {
           </div>
 
           <p className="text-xs text-[#241117] my-3 leading-relaxed">
-            আসসালামু আলাইকুম! কোনো প্রশ্ন বা অর্ডারে সাহায্য প্রয়োজন হলে আমাদের ফেসবুক মেসেঞ্জারে সরাসরি কথা বলুন 🌸
+            আসসালামু আলাইকুম! বেক্সি বয়েল নামাজের হিজাব, ইনার ক্যাপ বা হিজাব পিনের অর্ডার করতে মেসেঞ্জারে সরাসরি ইনবক্স করুন 🌸
           </p>
 
           <div className="space-y-2">
             <a
-              href="https://m.me/tiarabd"
+              href={MESSENGER_URL}
               target="_blank"
               rel="noreferrer"
-              className="w-full py-2 px-3 rounded-xl bg-[#0084FF] hover:bg-[#0070D6] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+              className="w-full py-2.5 px-3 rounded-xl bg-[#0084FF] hover:bg-[#0070D6] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
               <span>মেসেঞ্জারে চ্যাট শুরু করুন</span>
               <ExternalLink className="w-3 h-3 ml-0.5" />
             </a>
             <a
-              href="https://facebook.com/tiarabd"
+              href={FB_PROFILE_URL}
               target="_blank"
               rel="noreferrer"
-              className="w-full py-1.5 px-3 rounded-xl bg-[#FAF1F4] hover:bg-[#F7D6DE] text-[#590F23] text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full py-2 px-3 rounded-xl bg-[#FAF1F4] hover:bg-[#F7D6DE] text-[#590F23] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
             >
-              <span>ফেসবুক পেজ ভিজিট করুন</span>
+              <span>ফেসবুক প্রোফাইল দেখুন</span>
             </a>
           </div>
         </div>
@@ -58,13 +59,13 @@ export default function MessengerWidget() {
       {/* Floating Messenger Icon Button */}
       <div className="flex items-center gap-2">
         {!isOpen && (
-          <div className="hidden lg:flex items-center bg-white px-3 py-1.5 rounded-full shadow-md border border-[#F7D6DE] text-xs font-medium text-[#590F23] animate-bounce">
-            <span>সাহায্য প্রয়োজন?</span>
+          <div className="hidden lg:flex items-center bg-white px-3.5 py-1.5 rounded-full shadow-md border border-[#F7D6DE] text-xs font-semibold text-[#590F23] animate-bounce">
+            <span>অর্ডারে মেসেজ দিন 💬</span>
           </div>
         )}
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="w-13 h-13 rounded-full bg-gradient-to-tr from-[#0084FF] to-[#00C6FF] text-white flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all tiara-pulse-ring"
+          className="w-13 h-13 rounded-full bg-gradient-to-tr from-[#0084FF] to-[#00C6FF] text-white flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all tiara-pulse-ring cursor-pointer"
           aria-label="ফেসবুক মেসেঞ্জার চ্যাট"
         >
           <MessageCircle className="w-7 h-7 fill-current" />

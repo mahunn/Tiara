@@ -6,19 +6,17 @@ import Image from 'next/image';
 import { 
   Phone, 
   MapPin, 
-  Mail, 
   MessageCircle, 
-  Clock, 
   Truck,
-  Heart
+  ExternalLink
 } from 'lucide-react';
-import { CATEGORIES } from '@/lib/mockData';
+import { CATEGORIES, FB_PROFILE_URL, MESSENGER_URL } from '@/lib/mockData';
 
 export default function Footer() {
   return (
     <footer className="bg-[#241117] text-[#FAF1F4] pt-12 pb-24 sm:pb-12 border-t-4 border-[#590F23] relative overflow-hidden">
       
-      {/* Subtle floral texture background watermark on footer */}
+      {/* Subtle floral texture background watermark */}
       <div 
         className="absolute inset-0 opacity-5 pointer-events-none"
         style={{
@@ -41,17 +39,17 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs text-[#E5B6C3] leading-relaxed">
-              টিয়ারা (TIARA) আধুনিক রুচিশীল নারীর জন্য শালীন ও অভিজাত ফ্যাশনের সেরা ঠিকানা। খাঁটি দুবাই চেরি সিল্ক ও সৌদি নিদা ফেব্রিকে নিখুঁত কারচুপির কাজ।
+              🌷 নামাজের জন্য আরামদায়ক ও বাতাস চলাচল-সহায়ক খাঁটি বেক্সি বয়েল হিজাব, প্রিমিয়াম কটন ইনার ক্যাপ ও ম্যাগনেটিক পিন।
             </p>
-            <div className="pt-2">
+            <div className="pt-1 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs text-[#F7D6DE] border border-white/10">
                 <Truck className="w-3.5 h-3.5 text-[#E7BA83]" />
-                <span>সারা বাংলাদেশে ক্যাশ অন ডেলিভারি</span>
+                <span>চাঁদপুর সদর ৫০৳ | ঢাকা ১২০৳</span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Popular Categories */}
+          {/* Column 2: Categories */}
           <div>
             <h4 className="font-serif font-bold text-sm text-[#F7D6DE] tracking-wider uppercase mb-4 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-[#C68E4D] rounded-full"></span>
@@ -72,89 +70,90 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Customer Care & Policy */}
+          {/* Column 3: Customer Care & Delivery Policy */}
           <div>
             <h4 className="font-serif font-bold text-sm text-[#F7D6DE] tracking-wider uppercase mb-4 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-[#C68E4D] rounded-full"></span>
-              <span>কাস্টমার পলিসি</span>
+              <span>ডেলিভারি চার্জ</span>
             </h4>
             <ul className="space-y-2.5 text-xs text-[#E5B6C3]">
               <li>
-                <span className="text-white font-medium">ডেলিভারি চার্জ:</span>
-                <p className="text-[11px] text-[#E5B6C3] mt-0.5">ঢাকার ভিতরে ৳৭০ • ঢাকার বাইরে ৳১৩০</p>
+                <span className="text-white font-medium">চাঁদপুর সদর (চাঁদপুর):</span>
+                <p className="text-[11px] text-[#E5B6C3] mt-0.5">ডেলিভারি চার্জ মাত্র ৫০ টাকা 📦</p>
+              </li>
+              <li>
+                <span className="text-white font-medium">ঢাকা সিটি:</span>
+                <p className="text-[11px] text-[#E5B6C3] mt-0.5">ডেলিভারি চার্জ ১২০ টাকা 📦</p>
               </li>
               <li>
                 <span className="text-white font-medium">পেমেন্ট মেথড:</span>
-                <p className="text-[11px] text-[#E5B6C3] mt-0.5">ক্যাশ অন ডেলিভারি, বিকাশ, নগদ</p>
-              </li>
-              <li>
-                <span className="text-white font-medium">এক্সচেঞ্জ সুবিধা:</span>
-                <p className="text-[11px] text-[#E5B6C3] mt-0.5">সাইজ পরিবর্তন ৩ দিনের মধ্যে সম্ভব</p>
+                <p className="text-[11px] text-[#E5B6C3] mt-0.5">ক্যাশ অন ডেলিভারি (হাতে পেয়ে টাকা দিন)</p>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Helpline & Support */}
+          {/* Column 4: Facebook & Messenger Profile */}
           <div>
             <h4 className="font-serif font-bold text-sm text-[#F7D6DE] tracking-wider uppercase mb-4 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-[#C68E4D] rounded-full"></span>
-              <span>যোগাযোগ ও অর্ডার সহায়তা</span>
+              <span>ফেসবুক ও মেসেঞ্জার সাপোর্ট</span>
             </h4>
             <div className="space-y-3 text-xs text-[#E5B6C3]">
               <a 
-                href="tel:+8801700000000" 
-                className="flex items-center gap-2.5 hover:text-white transition-colors"
+                href={MESSENGER_URL} 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-white transition-colors p-2.5 rounded-xl bg-white/5 border border-white/10"
               >
-                <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-[#E7BA83]">
-                  <Phone className="w-3.5 h-3.5" />
+                <div className="w-8 h-8 rounded-lg bg-[#0084FF] flex items-center justify-center text-white flex-shrink-0">
+                  <MessageCircle className="w-4 h-4 fill-current" />
                 </div>
                 <div>
-                  <p className="text-[10px] text-[#FAF1F4]/70">হটলাইন নম্বর</p>
-                  <p className="font-bold text-[#F7D6DE]">০১৭০০-০০০০০০</p>
+                  <p className="text-[10px] text-[#FAF1F4]/70">মেসেঞ্জারে নক দিন</p>
+                  <p className="font-bold text-[#F7D6DE] flex items-center gap-1">
+                    <span>চ্যাট শুরু করুন</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </p>
                 </div>
               </a>
 
               <a 
-                href="https://m.me/tiarabd" 
+                href={FB_PROFILE_URL}
                 target="_blank" 
                 rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-white transition-colors"
+                className="flex items-center gap-2.5 hover:text-white transition-colors p-2.5 rounded-xl bg-white/5 border border-white/10"
               >
-                <div className="w-7 h-7 rounded-lg bg-[#0084FF]/20 flex items-center justify-center text-[#0084FF]">
-                  <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                <div className="w-8 h-8 rounded-lg bg-[#1877F2] flex items-center justify-center text-white flex-shrink-0">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
                 </div>
                 <div>
-                  <p className="text-[10px] text-[#FAF1F4]/70">মেসেঞ্জার সাপোর্ট</p>
-                  <p className="font-bold text-[#F7D6DE]">m.me/tiarabd</p>
+                  <p className="text-[10px] text-[#FAF1F4]/70">ফেসবুক প্রোফাইল</p>
+                  <p className="font-bold text-[#F7D6DE] flex items-center gap-1">
+                    <span>TIARA Facebook</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </p>
                 </div>
               </a>
-
-              <div className="flex items-start gap-2.5 pt-1">
-                <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-[#E7BA83] flex-shrink-0 mt-0.5">
-                  <MapPin className="w-3.5 h-3.5" />
-                </div>
-                <p className="text-[11px] leading-relaxed">
-                  ব্লক সি, রোড ৪, বনশ্রী, রামপুরা, ঢাকা ১২১৯, বাংলাদেশ
-                </p>
-              </div>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Bar with Copyright */}
+        {/* Bottom Bar */}
         <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#FAF1F4]/60">
           <p className="text-center sm:text-left">
             © 2026 <span className="font-serif font-bold text-white">TIARA</span>. সর্বস্বত্ব সংরক্ষিত।
           </p>
           <div className="flex items-center gap-2 text-xs">
+            <span>খাঁটি বেক্সি বয়েল</span>
+            <span>•</span>
             <span>ক্যাশ অন ডেলিভারি</span>
             <span>•</span>
-            <span>বিকাশ</span>
+            <span>চাঁদপুর সদর</span>
             <span>•</span>
-            <span>নগদ</span>
-            <span>•</span>
-            <span>রকেট</span>
+            <span>ঢাকা</span>
           </div>
         </div>
 

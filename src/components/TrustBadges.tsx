@@ -1,28 +1,28 @@
 'use client';
 
 import React from 'react';
-import { Truck, ShieldCheck, RefreshCw, Headphones } from 'lucide-react';
+import { Truck, ShieldCheck, Wind, CheckCircle2 } from 'lucide-react';
 
 const BADGES = [
   {
+    icon: Wind,
+    title: 'খাঁটি বেক্সি বয়েল (Bexi boil)',
+    description: '১০০% সুতি আরামদায়ক কাপড়, যা নামাজে বাতাস চলাচল নিশ্চিত করে',
+  },
+  {
+    icon: CheckCircle2,
+    title: 'এডজাস্টেবল ও ফুল কাভারেজ',
+    description: 'মাপ অনুযায়ী ফিতা দিয়ে ছোট-বড় করা যায় এবং বুক পিঠ সম্পূর্ণ কাভার করে',
+  },
+  {
     icon: Truck,
-    title: 'ক্যাশ অন ডেলিভারি',
-    description: 'পণ্য হাতে পেয়ে দেখে মূল্য পরিশোধের সম্পূর্ণ নিশ্চিন্ত সুবিধা',
+    title: 'চাঁদপুর সদর ৫০৳ | ঢাকা ১২০৳',
+    description: 'চাঁদপুরে দ্রুততম হোম ডেলিভারি ও ঢাকায় ১২০ টাকায় ক্যাশ অন ডেলিভারি',
   },
   {
     icon: ShieldCheck,
-    title: '১০০% অরিজিনাল ফেব্রিক',
-    description: 'খাঁটি দুবাই চেরি সিল্ক ও প্রিমিয়াম সৌদি নিদা কাপড়ের নিশ্চয়তা',
-  },
-  {
-    icon: RefreshCw,
-    title: 'সহজ সাইজ এক্সচেঞ্জ',
-    description: 'সাইজে সমস্যা হলে ৩ দিনের মধ্যে সহজ এক্সচেঞ্জ সাপোর্ট',
-  },
-  {
-    icon: Headphones,
-    title: 'মেসেঞ্জার ও ফোন সাপোর্ট',
-    description: 'সপ্তাহের ৭ দিন সকাল ৯টা থেকে রাত ১১টা পর্যন্ত কাস্টমার সেবা',
+    title: 'ক্যাশ অন ডেলিভারি',
+    description: 'পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ মূল্য পরিশোধের সুবিধা',
   },
 ];
 
