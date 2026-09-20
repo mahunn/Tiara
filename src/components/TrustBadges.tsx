@@ -16,8 +16,8 @@ const BADGES = [
   },
   {
     icon: Truck,
-    title: 'চাঁদপুর ৫০৳ • ঢাকা ১২০৳',
-    description: 'ক্যাশ অন ডেলিভারি',
+    title: 'চাঁদপুর ৫০৳ • বাহিরে ১২০৳',
+    description: 'ক্যাশ অন ডেলিভারি সুবিধা',
   },
   {
     icon: ShieldCheck,

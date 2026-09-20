@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CATEGORIES, PRODUCTS } from '@/lib/mockData';
-import ProductCard from '@/components/ProductCard';
+import CategoryProductView from '@/components/CategoryProductView';
 import { ChevronRight, Sparkles } from 'lucide-react';
 
 interface CategoryPageProps {
@@ -44,13 +44,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           )}
         </div>
 
-        {/* Products Grid */}
+        {/* Products Grid with Subcategory Filter */}
         {categoryProducts.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
-            {categoryProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <CategoryProductView products={categoryProducts} categoryId={category.id} />
         ) : (
           <div className="text-center py-16 bg-white rounded-3xl border border-[#F7D6DE] p-8">
             <h3 className="font-serif text-lg font-bold text-[#241117]">

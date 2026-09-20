@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS public.orders (
   customer_name TEXT NOT NULL,
   customer_phone TEXT NOT NULL,
   customer_address TEXT NOT NULL,
-  city_zone TEXT NOT NULL DEFAULT 'inside_dhaka',
+  city_zone TEXT NOT NULL DEFAULT 'chandpur',
   items JSONB NOT NULL DEFAULT '[]'::jsonb,
   subtotal NUMERIC NOT NULL DEFAULT 0,
-  delivery_fee NUMERIC NOT NULL DEFAULT 70,
+  delivery_fee NUMERIC NOT NULL DEFAULT 50,
   total_amount NUMERIC NOT NULL DEFAULT 0,
   payment_method TEXT NOT NULL DEFAULT 'cash_on_delivery',
   status TEXT NOT NULL DEFAULT 'pending',
@@ -24,14 +24,31 @@ CREATE TABLE IF NOT EXISTS public.orders (
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 
+-- Clean existing policies to allow re-running without errors
+DROP POLICY IF EXISTS "Allow anonymous orders insert" ON public.orders;
+DROP POLICY IF EXISTS "Allow public read access to orders" ON public.orders;
+DROP POLICY IF EXISTS "Allow admin update access to orders" ON public.orders;
+DROP POLICY IF EXISTS "Allow admin delete access to orders" ON public.orders;
+
 -- Allow anonymous customer orders (INSERT)
 CREATE POLICY "Allow anonymous orders insert" 
 ON public.orders FOR INSERT 
 WITH CHECK (true);
 
--- Allow viewing own orders or authenticated admin access (SELECT)
+-- Allow viewing orders (SELECT)
 CREATE POLICY "Allow public read access to orders" 
 ON public.orders FOR SELECT 
+USING (true);
+
+-- Allow admin order status updates (UPDATE)
+CREATE POLICY "Allow admin update access to orders" 
+ON public.orders FOR UPDATE 
+USING (true)
+WITH CHECK (true);
+
+-- Allow admin order deletions (DELETE)
+CREATE POLICY "Allow admin delete access to orders" 
+ON public.orders FOR DELETE 
 USING (true);
 
 -- 2. Products Table (Optional: for managing products dynamically)
@@ -59,6 +76,7 @@ CREATE TABLE IF NOT EXISTS public.products (
 );
 
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read on products" ON public.products;
 CREATE POLICY "Allow public read on products" ON public.products FOR SELECT USING (true);
 
 -- 3. Categories Table
@@ -74,4 +92,5 @@ CREATE TABLE IF NOT EXISTS public.categories (
 );
 
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read on categories" ON public.categories;
 CREATE POLICY "Allow public read on categories" ON public.categories FOR SELECT USING (true);

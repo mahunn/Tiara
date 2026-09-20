@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { Database } from '@/types/database.types';
 import { Order } from '@/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -11,7 +12,7 @@ export const isSupabaseConfigured = Boolean(
 );
 
 export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient<Database>(supabaseUrl, supabaseAnonKey)
   : null;
 
 /**
@@ -31,7 +32,7 @@ export async function saveOrder(order: Order): Promise<{ success: boolean; order
             customer_phone: order.customer.phone,
             customer_address: order.customer.address,
             city_zone: order.customer.cityZone,
-            items: order.items,
+            items: order.items as any,
             subtotal: order.subtotal,
             delivery_fee: order.deliveryFee,
             total_amount: order.total,

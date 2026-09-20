@@ -1,0 +1,115 @@
+[
+  {
+    "customer": {
+      "fullName": "সুমাইয়া রাহী",
+      "phone": "01811223344",
+      "address": "কোর্ট রোড, চাঁদপুর সদর",
+      "cityZone": "chandpur"
+    },
+    "items": [
+      {
+        "productId": "tiara-leopard-print-pleated-hijab",
+        "productName": "লেপার্ড প্রিন্ট প্লিটেড হিজাব",
+        "size": "১৯০/৯০ সিএম",
+        "color": "ব্লু (Blue)",
+        "quantity": 1,
+        "price": 430
+      }
+    ],
+    "subtotal": 430,
+    "deliveryFee": 50,
+    "total": 480,
+    "paymentMethod": "cash_on_delivery",
+    "status": "pending",
+    "id": "TR-173543",
+    "createdAt": "2026-09-20T07:43:45.665Z"
+  },
+  {
+    "customer": {
+      "fullName": "সুমাইয়া আক্তার",
+      "phone": "01912345678",
+      "address": "কোর্ট রোড, চাঁদপুর সদর",
+      "cityZone": "chandpur"
+    },
+    "items": [
+      {
+        "productId": "tiara-crepe-cotton-tassel-hijab",
+        "productName": "ক্রেপ কটন টেসেল হিজাব",
+        "size": "বড় সাইজ (১৯৫/৮৫)",
+        "color": "সেজ গ্রিন (Sage Green)",
+        "quantity": 1,
+        "price": 550
+      }
+    ],
+    "subtotal": 550,
+    "deliveryFee": 50,
+    "total": 600,
+    "paymentMethod": "cash_on_delivery",
+    "status": "confirmed",
+    "id": "TR-308626",
+    "createdAt": "2026-09-20T06:45:14.060Z"
+  },
+  {
+    "id": "TR-230329",
+    "customer": {
+      "fullName": "মাহিন চৌধুরী",
+      "phone": "01828034555",
+      "address": "মাদরাসা রোড, সদর হাসপাতাল সংলগ্ন, চাঁদপুর সদর",
+      "cityZone": "chandpur",
+      "notes": "বিকেলের মধ্যে ডেলিভারি দিলে ভালো হয়"
+    },
+    "items": [
+      {
+        "productId": "tiara-crepe-cotton-tassel-hijab",
+        "productName": "ক্রেপ কটন টেসেল হিজাব",
+        "size": "বড় সাইজ (১৯৫/৮৫)",
+        "color": "কপার (Copper)",
+        "quantity": 1,
+        "price": 550,
+        "image": "/images/products/hijabs/cotton-hijab-1/809107193_122103017367474189_5145764325827666920_n.jpg"
+      }
+    ],
+    "subtotal": 550,
+    "deliveryFee": 50,
+    "total": 600,
+    "paymentMethod": "cash_on_delivery",
+    "status": "pending",
+    "createdAt": "2026-09-20T06:44:45.505Z"
+  },
+  {
+    "id": "TR-230315",
+    "customer": {
+      "fullName": "তানজিলা হক",
+      "phone": "01711223344",
+      "address": "বাসা ৪২, রোড ৭, সেক্টর ৪, উত্তরা, ঢাকা",
+      "cityZone": "dhaka",
+      "notes": "কল দিয়ে আসবেন"
+    },
+    "items": [
+      {
+        "productId": "tiara-crepe-cotton-tassel-hijab",
+        "productName": "ক্রেপ কটন টেসেল হিজাব",
+        "size": "বড় সাইজ (১৯৫/৮৫)",
+        "color": "সেজ গ্রিন (Sage Green)",
+        "quantity": 1,
+        "price": 550,
+        "image": "/images/products/hijabs/cotton-hijab-1/809107193_122103017895474189_3647366001408501052_n.jpg"
+      },
+      {
+        "productId": "tiara-dressmaker-hijab-pins",
+        "productName": "স্টেইনলেস স্টিল বল হিজাব পিন বক্স",
+        "size": "১ বক্স",
+        "color": "গোল্ডেন (Gold)",
+        "quantity": 1,
+        "price": 150,
+        "image": "/images/products/hijab-pins.jpg"
+      }
+    ],
+    "subtotal": 700,
+    "deliveryFee": 120,
+    "total": 820,
+    "paymentMethod": "cash_on_delivery",
+    "status": "confirmed",
+    "createdAt": "2026-09-20T04:44:45.505Z"
+  }
+]

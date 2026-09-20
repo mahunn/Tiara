@@ -26,6 +26,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tiara.com.bd'),
   title: 'TIARA | প্রিমিয়াম আবায়া, গাউন ও শালীন ফ্যাশন কালেকশন',
   description: 'TIARA - এক্সক্লুসিভ দুবাই চেরি সিল্ক আবায়া, ফেস্টিভ গাউন এবং ফ্রেঞ্চ শিফন খিমার। সারা বাংলাদেশে দ্রুত ক্যাশ অন ডেলিভারি।',
   keywords: 'TIARA, Abaya Bangladesh, Borka, Hijab, Khimar, Modest Fashion, Eid Collection, ক্যাশ অন ডেলিভারি বোরকা',

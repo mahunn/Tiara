@@ -14,13 +14,27 @@ const SLIDES = [
   },
   {
     id: 2,
+    title: 'নতুন কালেকশন: ক্রেপ কটন টেসেল হিজাব',
+    image: '/images/products/hijabs/cotton-hijab-1/Main.jpg',
+    link: '/category/hijab',
+    isBrandBanner: false,
+  },
+  {
+    id: 3,
     title: 'বেক্সি বয়েল নামাজের হিজাব',
     image: '/images/products/prayer-hijab-all-1.jpg',
     link: '/category/hijab',
     isBrandBanner: false,
   },
   {
-    id: 3,
+    id: 4,
+    title: 'নতুন কালেকশন: লেপার্ড প্রিন্ট প্লিটেড হিজাব',
+    image: '/images/products/hijabs/hijab-2/main2.jpg',
+    link: '/product/leopard-print-pleated-hijab',
+    isBrandBanner: false,
+  },
+  {
+    id: 5,
     title: 'লেইস ইনার ক্যাপ ও হিজাব পিন',
     image: '/images/products/inner-cap-lace.jpg',
     link: '/category/inner-cap',

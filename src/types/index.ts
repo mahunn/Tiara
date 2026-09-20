@@ -4,6 +4,7 @@ export interface Product {
   banglaName?: string;
   slug: string;
   category: string;
+  subCategory?: string;
   price: number;
   originalPrice?: number;
   discountBadge?: string;
@@ -12,7 +13,7 @@ export interface Product {
   bulletPoints?: string[];
   fabric?: string;
   sizes: string[];
-  colors: { name: string; hex: string }[];
+  colors: { name: string; hex: string; image?: string; price?: number; originalPrice?: number }[];
   inStock: boolean;
   isFeatured?: boolean;
   isTrending?: boolean;
@@ -47,22 +48,25 @@ export interface OrderCustomer {
   notes?: string;
 }
 
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  size: string;
+  color: string;
+  quantity: number;
+  price: number;
+  image?: string;
+}
+
 export interface Order {
   id?: string;
   customer: OrderCustomer;
-  items: {
-    productId: string;
-    productName: string;
-    size: string;
-    color: string;
-    quantity: number;
-    price: number;
-  }[];
+  items: OrderItem[];
   subtotal: number;
   deliveryFee: number;
   total: number;
   paymentMethod: 'cash_on_delivery' | 'bkash' | 'nagad';
-  status?: 'pending' | 'processing' | 'shipped' | 'delivered';
+  status?: 'pending' | 'processing' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
   createdAt?: string;
 }
 

@@ -22,10 +22,10 @@ export default function Home() {
       {/* 2. 3 Categories (হিজাব, লেইস ইনার ক্যাপ, হিজাব পিন) */}
       <CategoryPills />
 
-      {/* 3. Hijabs Set Colorwise */}
+      {/* 3. Hijab Collection: Crepe Cotton Tassel & Prayer Hijabs */}
       <ProductSection
-        title="PRAYER HIJAB COLLECTION"
-        banglaTitle="খাঁটি বেক্সি বয়েল নামাজের হিজাব"
+        title="HIJAB COLLECTION"
+        banglaTitle="হিজাব কালেকশন (ক্রেপ কটন ও খাঁটি বেক্সি বয়েল)"
         products={hijabProducts}
         viewAllLink="/category/hijab"
       />

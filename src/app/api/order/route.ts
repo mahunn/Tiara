@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveOrder } from '@/lib/supabase';
+import { createOrderServer } from '@/lib/orderStore';
 import { Order } from '@/types';
 
 export async function POST(req: NextRequest) {
@@ -13,17 +13,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await saveOrder(body);
+    const result = await createOrderServer(body);
 
     if (result.success) {
       return NextResponse.json({
         success: true,
         orderId: result.orderId,
-        message: 'অর্ডার সফলভাবে গ্রহণ করা হয়েছে',
+        order: result.order,
+        message: 'অর্ডার সফলভাবে গ্রহণ করা হয়েছে',
       });
     } else {
       return NextResponse.json(
-        { success: false, error: result.error || 'অর্ডার প্রক্রিয়া করা যায়নি' },
+        { success: false, error: 'অর্ডার প্রক্রিয়া করা যায়নি' },
         { status: 500 }
       );
     }

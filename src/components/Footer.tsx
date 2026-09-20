@@ -39,7 +39,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs text-[#E5B6C3] leading-relaxed">
-              নামাজের হিজাব, বাতাস চলাচল-উপযোগী লেইস ইনার ক্যাপ ও হিজাব পিন।
+              প্রিমিয়াম কটন ও নামাজের হিজাব, বাতাস চলাচল-উপযোগী লেইস ইনার ক্যাপ ও হিজাব পিন।
             </p>
             <div className="pt-1 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs text-[#F7D6DE] border border-white/10">
@@ -145,14 +145,16 @@ export default function Footer() {
           <p className="text-center sm:text-left">
             © 2026 <span className="font-serif font-bold text-white">TIARA</span>. সর্বস্বত্ব সংরক্ষিত।
           </p>
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-2 text-xs flex-wrap justify-center sm:justify-end">
             <span>খাঁটি বেক্সি বয়েল</span>
             <span>•</span>
             <span>ক্যাশ অন ডেলিভারি</span>
             <span>•</span>
             <span>চাঁদপুর সদর</span>
             <span>•</span>
-            <span>ঢাকা</span>
+            <Link href="/admin" className="text-[#F7D6DE] hover:underline flex items-center gap-1 font-medium">
+              <span>🔒 অ্যাডমিন পোর্টাল</span>
+            </Link>
           </div>
         </div>
 

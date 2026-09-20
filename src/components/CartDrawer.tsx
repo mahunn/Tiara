@@ -101,11 +101,36 @@ export default function CartDrawer() {
       status: 'pending',
     };
 
-    const res = await saveOrder(newOrder);
+    let generatedOrderId = `TR-${Math.floor(100000 + Math.random() * 900000)}`;
+    let isSuccess = false;
+
+    try {
+      const apiRes = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newOrder),
+      });
+      const data = await apiRes.json();
+      if (data.success && data.orderId) {
+        generatedOrderId = data.orderId;
+        isSuccess = true;
+      }
+    } catch (err) {
+      console.warn('API error, saving via client fallback:', err);
+    }
+
+    if (!isSuccess) {
+      const res = await saveOrder(newOrder);
+      if (res.success) {
+        generatedOrderId = res.orderId;
+        isSuccess = true;
+      }
+    }
+
     setIsSubmitting(false);
 
-    if (res.success) {
-      setOrderSuccess({ orderId: res.orderId });
+    if (isSuccess) {
+      setOrderSuccess({ orderId: generatedOrderId });
       clearCart();
       try {
         confetti({
@@ -225,7 +250,7 @@ export default function CartDrawer() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="নাম লিখুন"
-                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-xs text-[#241117] focus:outline-none focus:border-[#590F23]"
+                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-base sm:text-sm text-[#241117] focus:outline-none focus:border-[#590F23]"
                     />
                   </div>
                 </div>
@@ -243,7 +268,7 @@ export default function CartDrawer() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="01XXXXXXXXX"
                       maxLength={11}
-                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-xs text-[#241117] focus:outline-none focus:border-[#590F23]"
+                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-base sm:text-sm text-[#241117] focus:outline-none focus:border-[#590F23]"
                     />
                   </div>
                 </div>
@@ -301,7 +326,7 @@ export default function CartDrawer() {
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       placeholder="বাসা নম্বর, রোড, এলাকা, উপজেলা/থানা"
-                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-xs text-[#241117] focus:outline-none focus:border-[#590F23]"
+                      className="w-full pl-9 pr-3 py-2 bg-[#FAF1F4] border border-[#F7D6DE] rounded-xl text-base sm:text-sm text-[#241117] focus:outline-none focus:border-[#590F23]"
                     />
                   </div>
                 </div>
